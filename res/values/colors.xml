@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+   <color name="color_hei_8">#00000000</color>
+
+    <drawable name="trans">@color/color_hei_8</drawable>
+
+    <color name="gesture_background">#ff303237</color>
+    <color name="qiege_font_color">#64c430</color>
+
+   
+
+    <!-- <color name="rippelColor">#98d9f1</color> -->
+    <color name="rippelColor">#66aaff</color>
+    <!-- dialog -->
+    <color name="triangle">#72d572</color>
+    <color name="circle">#738ffe</color>
+    <color name="rect">#e84e40</color>
+    <color name="view_bg">#00000000</color>
+    <color name="shadow">#bdbdbd</color>
+
+    
+    <color name="menu_bg">#eeeeee</color>
+    <color name="menu_item_bg">#e0e0e0</color>
+    
+   
+</resources>

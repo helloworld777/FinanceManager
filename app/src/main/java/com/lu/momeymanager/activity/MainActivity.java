@@ -60,10 +60,8 @@ public class MainActivity extends BaseFragmentActivity {
 	@Override
 	protected void initWidget() {
 		
-		// ͸��״̬��
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-		// //͸��������
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		
 		fragment = new MouthMoneyFragment();

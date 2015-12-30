@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    >
+     <include
+        android:id="@+id/header"
+        layout="@layout/head" />
+     
+	 <com.lu.momeymanager.widget.RippleView
+        android:id="@+id/rlLockpasswordstate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/menu_bg"
+        android:padding="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="手势密码锁定" />
+
+        <TextView
+            android:id="@+id/tvLockpasswordstate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgRight"
+            android:text="@string/no_setting"
+            android:textColor="#a0a0a0"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imgRight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/group_arrow_right" />
+    </com.lu.momeymanager.widget.RippleView>
+    
+	 
+	 <com.lu.momeymanager.widget.RippleView
+        android:id="@+id/rlToExcel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/menu_bg"
+        android:padding="15dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:text="导出excel" />
+
+    </com.lu.momeymanager.widget.RippleView>
+</LinearLayout>

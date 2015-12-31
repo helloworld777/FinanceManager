@@ -23,7 +23,9 @@ import com.lu.momeymanager.util.StringUtil;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
@@ -51,7 +53,7 @@ public class InOutBeanManager {
     private Context mContext;
     private SQLiteDatabase database;
     private static InOutBeanManager smsManager;
-
+    private List<String> bankNumbers=new ArrayList<>();
     public static void init(Context context) {
         smsManager = new InOutBeanManager(context);
     }
@@ -120,6 +122,8 @@ public class InOutBeanManager {
         if (database == null) {
             database = helper.getWritableDatabase();
         }
+        bankNumbers.add(StringUtil.puFaNumber);
+        bankNumbers.add(StringUtil.jinHangNumber);
     }
 
 
@@ -170,7 +174,7 @@ public class InOutBeanManager {
             long date = cur.getLong(cur.getColumnIndex("date"));
             String date2 = format.format(new Date(date));
             long id = cur.getLong(cur.getColumnIndex("_id"));
-            LogUtil.d(TAG, "date:" + date2 + ",_id:" + id);
+//            LogUtil.d(TAG, "date:" + date2 + ",_id:" + id);
             resolveMsgBody(number, body, date2);
         }
         long end = System.currentTimeMillis();
@@ -178,57 +182,100 @@ public class InOutBeanManager {
     }
 
     private void resolveMsgBody(String number, String body, String date2) {
-        String flag = null;
-        boolean out = true;
-        String bank = null;
-        boolean isInAndOut=false;
-        if (!number.equals(StringUtil.puFaNumber) || !number.equals(StringUtil.jinHangNumber)) {
-            return;
-        }
-        if (number.equals(StringUtil.puFaNumber)) {
-            bank = StringUtil.puFa;
-            if (body.contains(StringUtil.pufaOutFlag1)) {
-                flag = StringUtil.pufaOutFlag1;
-                out = true;
-                isInAndOut=true;
-            } else if (body.contains(StringUtil.puFaInFlag2)) {
-                flag = StringUtil.puFaInFlag2;
-                out = false;
-                isInAndOut=true;
-            } else if (body.contains(StringUtil.pufaOutFlag2)) {
-                flag = StringUtil.pufaOutFlag2;
-                out = true;
-                isInAndOut=true;
-            } else if (body.contains(StringUtil.puFaInFlag1)) {
-                flag = StringUtil.puFaInFlag1;
-                out = false;
-                isInAndOut=true;
-            }else{
-                isInAndOut=false;
-            }
-        } else if (number.equals(StringUtil.jinHangNumber)) {
-            bank = StringUtil.jinHang;
-            if (body.contains(StringUtil.jianHangOutFlag)) {
-                flag = StringUtil.jianHangOutFlag;
-                out = true;
-                isInAndOut=true;;
-            } else if (body.contains(StringUtil.jianHangInFlag)) {
-                flag = StringUtil.jianHangInFlag;
-                out = false;
-                isInAndOut=true;
-            }else{
-                isInAndOut=false;
-            }
-        }else{
-            isInAndOut=false;
-        }
-        if(isInAndOut){
-            addMoneyBean(body, flag, bank, date2, out);
-        }
+        LogUtil.d(TAG, "resolveMsgBody----------number:"+number+",data2:"+date2);
+        if (resolveMsgHelp.bankNums.keySet().contains(number)) {
 
+//            if (number.equals(StringUtil.puFaNumber)) {
+//                bank = StringUtil.puFa;
+//                if (body.contains(StringUtil.pufaOutFlag1)) {
+//                    flag = StringUtil.pufaOutFlag1;
+//                    out = true;
+//                    isInAndOut = true;
+//                } else if (body.contains(StringUtil.puFaInFlag2)) {
+//                    flag = StringUtil.puFaInFlag2;
+//                    out = false;
+//                    isInAndOut = true;
+//                } else if (body.contains(StringUtil.pufaOutFlag2)) {
+//                    flag = StringUtil.pufaOutFlag2;
+//                    out = true;
+//                    isInAndOut = true;
+//                } else if (body.contains(StringUtil.puFaInFlag1)) {
+//                    flag = StringUtil.puFaInFlag1;
+//                    out = false;
+//                    isInAndOut = true;
+//                } else {
+//                    isInAndOut = false;
+//                }
+//            } else if (number.equals(StringUtil.jinHangNumber)) {
+//                bank = StringUtil.jinHang;
+//                if (body.contains(StringUtil.jianHangOutFlag)) {
+//                    flag = StringUtil.jianHangOutFlag;
+//                    out = true;
+//                    isInAndOut = true;
+//                } else if (body.contains(StringUtil.jianHangInFlag)) {
+//                    flag = StringUtil.jianHangInFlag;
+//                    out = false;
+//                    isInAndOut = true;
+//                } else {
+//                    isInAndOut = false;
+//                }
+//            } else {
+//                isInAndOut = false;
+//            }
+//            if(resolveMsgHelp.outFlags.contains())
 
+//            String flag = null;
+//            boolean out = true;
+//            String bank = null;
+//            boolean isInAndOut=false;
+
+            String flag=bodyContainFlag(body,resolveMsgHelp.inFlags);
+            boolean out=false;
+            if(flag==null){
+                flag=bodyContainFlag(body,resolveMsgHelp.outFlags);
+                out=true;
+            }
+            if(flag!=null){
+                String bank=resolveMsgHelp.bankNums.get(number);
+                addMoneyBean(body, flag, bank, date2, out);
+            }
+//            if (isInAndOut) {
+//
+//            }
+        }
     }
+    private String bodyContainFlag(String body,List<String> flags){
+        for(String flag:flags){
+            if(body.contains(flag)){
+                return flag;
+            }
+        }
+        return null;
+    }
+    ResolveMsgHelp resolveMsgHelp=new ResolveMsgHelp();
+    private class ResolveMsgHelp{
+        ResolveMsgHelp(){
+//            Map<String,String> map1=new HashMap<>();
+//            bankNums.add(StringUtil.puFaNumber);
+//            bankNums.add(StringUtil.jinHangNumber);
+//            map1.put(StringUtil.puFaNumber, StringUtil.puFa);
+            bankNums.put(StringUtil.puFaNumber,StringUtil.puFa);
+            bankNums.put(StringUtil.jinHangNumber,StringUtil.jinHang);
 
+            inFlags.add(StringUtil.puFaInFlag1);
+            inFlags.add(StringUtil.puFaInFlag2);
+            inFlags.add(StringUtil.jianHangInFlag);
+
+            outFlags.add(StringUtil.jianHangOutFlag);
+            outFlags.add(StringUtil.pufaOutFlag1);
+            outFlags.add(StringUtil.pufaOutFlag2);
+
+        }
+//        List<Map<String,String>> bankNums=new ArrayList<>();
+        Map<String,String> bankNums=new HashMap<>();
+        List<String> inFlags=new ArrayList<>();
+        List<String> outFlags=new ArrayList<>();
+    }
     private void resolveFlag() {
 
     }

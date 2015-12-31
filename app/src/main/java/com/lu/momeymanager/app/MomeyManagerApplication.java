@@ -16,9 +16,12 @@ public class MomeyManagerApplication extends Application {
 		managerApplication=this;
 		setmLockPatternUtils(new LockPatternUtils(this));
 //		CrashHandler.getInstance().init(getApplicationContext());
+
+
+		StringUtil.initString(getApplicationContext());
 		InOutBeanManager.init(this);
 		
-		StringUtil.initString(getApplicationContext());
+
 	}
 	public LockPatternUtils getLockPatternUtils() {
 		return mLockPatternUtils;

@@ -127,6 +127,7 @@ public class MainActivity extends BaseFragmentActivity {
 		case R.id.btnRefresh:
 //			InOutBeanManager.getDefault().refresh();
 			EventBus.getDefault().post(new BaseEvent(BaseEvent.UPDATE_MAIN, SimilarDateMoneyBean.TYPE_MOUTH));
+
 			break;
 		default:
 			break;

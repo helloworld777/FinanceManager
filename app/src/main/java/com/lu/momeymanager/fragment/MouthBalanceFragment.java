@@ -21,6 +21,7 @@ import com.lu.momeymanager.bean.SimilarDateMoneyBean;
 import com.lu.momeymanager.manager.ExcelManager;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.LogUtil;
+import com.lu.momeymanager.widget.dialog.DialogLoading;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -75,9 +76,10 @@ public class MouthBalanceFragment extends BaseFragment {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				EventBus.getDefault().post(new BaseEvent(BaseEvent.CHANGE_FRAGMENT,arg2));
+				EventBus.getDefault().post(new BaseEvent(BaseEvent.CHANGE_FRAGMENT, arg2));
 			}
 		});
+		loading=new DialogLoading(getActivity());
 		return view;
 	}
 	public void updateData(int sortType){
@@ -124,10 +126,13 @@ public class MouthBalanceFragment extends BaseFragment {
 		
 		ExcelManager.excelToDisk(similarDateMoneyBeans);
 	}
+	DialogLoading loading;
 	public void onEventMainThread(BaseEvent baseEvent) {
 		switch (baseEvent.getEventType()) {
 		case BaseEvent.UPDATE_MAIN:
-			updateData((Integer)baseEvent.getData());
+			loading.show();
+			updateData((Integer) baseEvent.getData());
+			loading.dismiss();
 			break;
 		default:
 			break;

@@ -19,19 +19,19 @@ public class ExcelManager {
 	public static String excelToDisk(List<SimilarDateMoneyBean> similarDateMoneyBeans) {
 
 		HSSFWorkbook wb = new HSSFWorkbook();
-		HSSFSheet sheet = wb.createSheet("a");
+		HSSFSheet sheet = wb.createSheet("table");
 		HSSFRow row = sheet.createRow((int) 0);
 		HSSFCellStyle style = wb.createCellStyle();
 		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
 		HSSFCell cell = row.createCell((short) 0);
-		cell.setCellValue("bbbbbb");
+		cell.setCellValue("InOut");
 		cell.setCellStyle(style);
 		cell = row.createCell((short) 1);
-		cell.setCellValue("ccccc");
+		cell.setCellValue("Bank");
 		cell.setCellStyle(style);
 		cell = row.createCell((short) 2);
-		cell.setCellValue("ddddd");
+		cell.setCellValue("Date");
 		cell.setCellStyle(style);
 
 		int count = 0;

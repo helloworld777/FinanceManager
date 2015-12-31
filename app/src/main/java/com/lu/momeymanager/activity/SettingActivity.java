@@ -58,9 +58,9 @@ public class SettingActivity extends BaseHeaderActivity {
 		case R.id.rlToExcel:
 			String path=ExcelManager.excelToDisk(InOutBeanManager.getDefault().getSimilarDateMoneyBeans());
 			if(path!=null){
-				DialogUtil.showToast(getBaseContext(), "�����ɹ�,·��:"+path);
+				DialogUtil.showToast(getBaseContext(), "save success path:"+path);
 			}else{
-				DialogUtil.showToast(getApplicationContext(), "����ʧ��");
+				DialogUtil.showToast(getApplicationContext(), "save faild");
 			}
 			break;
 		default:

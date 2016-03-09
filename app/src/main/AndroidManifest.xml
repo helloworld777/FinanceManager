@@ -26,7 +26,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.lu.momeymanager.activity.MainActivity"
+            android:name="com.lu.momeymanager.view.widget.activity.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,20 +34,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.SettingActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.SettingActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.BalanceQueryActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.BalanceQueryActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.gesturepassword.CreateGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.gesturepassword.GresturePasswordSetActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.GresturePasswordSetActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.gesturepassword.GuideGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.GuideGesturePasswordActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.activity.gesturepassword.UnlockGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.UnlockGesturePasswordActivity" >
         </activity>
 
-        <receiver android:name="com.lu.momeymanager.receiver.SmsBroadcastReceiver" >
+        <receiver android:name="com.lu.momeymanager.view.widget.receiver.SmsBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

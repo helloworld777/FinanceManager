@@ -22,7 +22,7 @@
  * THE SOFTWARE.
  */
 
-package com.lu.momeymanager.widget;
+package com.lu.momeymanager.view.widget;
 
 
 import com.lu.momeymanager.R;
@@ -49,7 +49,7 @@ import android.widget.RelativeLayout;
 
 /****
  * 
- * ¾ßÓÐË®²¨ÎÆÐ§¹û
+ * ï¿½ï¿½ï¿½ï¿½Ë®ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½
  */
 @SuppressLint("NewApi") 
 public class RippleView extends RelativeLayout {

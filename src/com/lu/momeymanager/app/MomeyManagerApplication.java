@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.StringUtil;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternUtils;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
 
 public class MomeyManagerApplication extends Application {
 	private LockPatternUtils mLockPatternUtils;

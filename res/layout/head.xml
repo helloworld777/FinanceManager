@@ -20,7 +20,7 @@
             android:background="@drawable/selector_music_btn"
             android:src="@drawable/ic_common_title_bar_back" />
 
-        <com.lu.momeymanager.widget.AlwaysMarqueeTextView
+        <com.lu.momeymanager.view.widget.AlwaysMarqueeTextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity.gesturepassword;
+package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -45,7 +45,7 @@ public class LockPasswordUtils {
 	}
 
 	/**
-	 * Ëø¶¨ÃÜÂë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param context
 	 */
 	public LockPasswordUtils(Context context) {

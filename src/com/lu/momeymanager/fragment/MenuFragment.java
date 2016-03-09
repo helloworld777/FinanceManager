@@ -1,8 +1,8 @@
-package com.lu.momeymanager.fragment;
+package com.lu.momeymanager.view.widget.fragment;
 
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.activity.BalanceQueryActivity;
-import com.lu.momeymanager.activity.SettingActivity;
+import com.lu.momeymanager.view.widget.activity.BalanceQueryActivity;
+import com.lu.momeymanager.view.widget.activity.SettingActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

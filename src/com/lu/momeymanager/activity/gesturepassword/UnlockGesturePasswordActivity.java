@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity.gesturepassword;
+package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
 import java.util.List;
 
@@ -22,27 +22,27 @@ import com.lu.momeymanager.app.MomeyManagerApplication;
 import com.lu.momeymanager.util.DialogUtil;
 import com.lu.momeymanager.util.LogUtil;
 import com.lu.momeymanager.util.SaveDataUtil;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternUtils;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternView;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternView.Cell;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.Cell;
 
 public class UnlockGesturePasswordActivity extends Activity {
-	/** ÖÐ¼ä½âËøÍ¼°¸ **/
+	/** ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ **/
 	private LockPatternView mLockPatternView;
-	/** ½âËø´íÎó´ÎÊý **/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ **/
 	private int mFailedPatternAttemptsSinceLastTimeout = 0;
-	/** ¼ÆÊ±Æ÷ **/
+	/** ï¿½ï¿½Ê±ï¿½ï¿½ **/
 	private CountDownTimer mCountdownTimer = null;
 	/** Handler **/
 	private Handler mHandler = new Handler();
-	/** ¶¥²¿ÎÄ±¾ **/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ **/
 	private TextView mHeadTextView;
 	private Animation mShakeAnim;
 
 	private Toast mToast;
 
 	/**
-	 * µ¯³öÌáÊ¾ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢
 	 * 
 	 * @param message
 	 */
@@ -61,10 +61,10 @@ public class UnlockGesturePasswordActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		// ÉèÖÃ²¼¾Ö
+		// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 		setContentView(R.layout.activity_gesturepassword_unlock);
 
-		// ¸ù¾ÝidÔÚ²¼¾ÖÖÐÕÒµ½¿Ø¼þ¶ÔÏó
+		// ï¿½ï¿½ï¿½ï¿½idï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½
 		mLockPatternView = (LockPatternView) this
 				.findViewById(R.id.gesturepwd_unlock_lockview);
 		mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
@@ -77,7 +77,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 
-		// ÅÐ¶ÏÊÇ·ñÉèÖÃÁËËøÆÁÃÜÂë,Èç¹ûÃ»ÉèÖÃ,Ìø×ªµ½ÉèÖÃ½çÃæ
+		// ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½
 		// if (!App.getInstance().getLockPatternUtils().savedPatternExists()) {
 		// startActivity(new Intent(this, GuideGesturePasswordActivity.class));
 		// finish();
@@ -87,13 +87,13 @@ public class UnlockGesturePasswordActivity extends Activity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		// ÅÐ¶Ï¼ÆÊ±Æ÷¶ÔÏóÊÇ·ñÎª¿Õ
-		if (mCountdownTimer != null)// ²»Îª¿Õ
-			mCountdownTimer.cancel();// È¡Ïû¼ÆÊ±Æ÷
+		// ï¿½Ð¶Ï¼ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½
+		if (mCountdownTimer != null)// ï¿½ï¿½Îªï¿½ï¿½
+			mCountdownTimer.cancel();// È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	}
 
 	/**
-	 * Çå³ý»æÖÆµÄÍ¼°¸,»Ö¸´µ½³õÊ¼×´Ì¬
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½,ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼×´Ì¬
 	 */
 	private Runnable mClearPatternRunnable = new Runnable() {
 		public void run() {
@@ -114,66 +114,66 @@ public class UnlockGesturePasswordActivity extends Activity {
 
 		public void onPatternDetected(List<LockPatternView.Cell> pattern) {
 
-			if (pattern == null)// ÅÐ¶ÏpatternÊÇ·ñÎª¿Õ
+			if (pattern == null)// ï¿½Ð¶ï¿½patternï¿½Ç·ï¿½Îªï¿½ï¿½
 				return;
 
-			// ÅÐ¶Ï½âËøÊÇ·ñ³É¹¦
+			// ï¿½Ð¶Ï½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½É¹ï¿½
 			if (MomeyManagerApplication.getInstance().getLockPatternUtils()
-					.checkPattern(pattern)) {// ³É¹¦
+					.checkPattern(pattern)) {// ï¿½É¹ï¿½
 
-				// ÉèÖÃµ±Ç°Ä£Ê½ÎªÕýÈ·¶øÄ£Ê½
+				// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ä£Ê½Îªï¿½ï¿½È·ï¿½ï¿½Ä£Ê½
 				mLockPatternView
 						.setDisplayMode(LockPatternView.DisplayMode.Correct);
 
-				// ÉèÖÃIntentÌø×ªÄ¿±ê
+				// ï¿½ï¿½ï¿½ï¿½Intentï¿½ï¿½×ªÄ¿ï¿½ï¿½
 				// Intent intent = new
 				// Intent(UnlockGesturePasswordActivity.this,
 				// GuideGesturePasswordActivity.class);
-				// // ´ò¿ªÐÂµÄActivity
+				// // ï¿½ï¿½ï¿½Âµï¿½Activity
 				// startActivity(intent);
-				showToast("½âËø³É¹¦");
+				showToast("ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 				SaveDataUtil.setAppToBack(
 						UnlockGesturePasswordActivity.this, 0);
-				// ½áÊøµ±Ç°µÄActivity
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½Activity
 				setResult(1);
 				finish();
 //				Process process=new Process();
 				
 
-			} else {// Î´³É¹¦
+			} else {// Î´ï¿½É¹ï¿½
 
-				// ÉèÖÃµ±Ç°Ä£Ê½Îª´íÎóÄ£Ê½
+				// ï¿½ï¿½ï¿½Ãµï¿½Ç°Ä£Ê½Îªï¿½ï¿½ï¿½ï¿½Ä£Ê½
 				mLockPatternView
 						.setDisplayMode(LockPatternView.DisplayMode.Wrong);
 
-				// ÅÐ¶ÏÊäÈë³¤¶È
-				if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {// ÊäÈë³¤¶È´ïµ½×îµÍÒªÇó
+				// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½
+				if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {// ï¿½ï¿½ï¿½ë³¤ï¿½È´ïµ½ï¿½ï¿½ï¿½Òªï¿½ï¿½
 
-					// Í³¼ÆÊäÈë´íÎó´ÎÊý
+					// Í³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					mFailedPatternAttemptsSinceLastTimeout++;
-					// Í³¼ÆÊ£ÓàµÄ½âËø´ÎÊý
+					// Í³ï¿½ï¿½Ê£ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					int retry = LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT
 							- mFailedPatternAttemptsSinceLastTimeout;
-					// ÅÐ¶ÏÊ£ÓàµÄ½âËø´ÎÊý
+					// ï¿½Ð¶ï¿½Ê£ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if (retry >= 0) {
-						if (retry == 0)// Èç¹ûÊ£Óà´ÎÊýµÈÓÚ0,Í¨ÖªÓÃ»§30ÃëºóÖØÊÔ
-							showToast("ÄúÒÑ5´ÎÊä´íÃÜÂë£¬Çë30ÃëºóÔÙÊÔ");
-						mHeadTextView.setText("ÃÜÂë´íÎó£¬»¹¿ÉÒÔÔÙÊäÈë" + retry + "´Î");
+						if (retry == 0)// ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0,Í¨Öªï¿½Ã»ï¿½30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+							showToast("ï¿½ï¿½ï¿½ï¿½5ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+						mHeadTextView.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + retry + "ï¿½ï¿½");
 						mHeadTextView.setTextColor(Color.RED);
 						mHeadTextView.startAnimation(mShakeAnim);
 					}
 
-				} else {// ÊäÈë³¤¶ÈÎ´´ïµ½ÒªÇó
-					showToast("ÊäÈë³¤¶È²»¹»£¬ÇëÖØÊÔ");
+				} else {// ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½Î´ï¿½ïµ½Òªï¿½ï¿½
+					showToast("ï¿½ï¿½ï¿½ë³¤ï¿½È²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				}
 
-				// ÅÐ¶ÏÊäÈë´íÎó´ÎÊý
-				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {// ´íÎó´ÎÊý´ïµ½×î¸ßÏÞÖÆ
-					// Í¨Öª½ûÓÃ½âËøÇøÓò30Ãë,30ÃëºóÖØÖÃ»ñµÃ5´Î½âËø»ú»á
+				// ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					// Í¨Öªï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½30ï¿½ï¿½,30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½5ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					mHandler.postDelayed(attemptLockout, 2000);
 
-				} else {// ´íÎó´ÎÊýÎ´´ïµ½×î¸ßÏÞÖÆ
-					// Í¨ÖªÇå³ý»æÖÆµÄÍ¼°¸,»Ö¸´ËùÓÐÍ¼°¸×´Ì¬
+				} else {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î´ï¿½ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					// Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½,ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬
 					mLockPatternView.postDelayed(mClearPatternRunnable, 2000);
 				}
 			}
@@ -192,23 +192,23 @@ public class UnlockGesturePasswordActivity extends Activity {
 
 		@Override
 		public void run() {
-			// Çå³ýÒÑ¾­»æÖÆµÄÍ¼°¸
+			// ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½
 			mLockPatternView.clearPattern();
-			// ½ûÓÃÖÐ¼äÍ¼°¸½âËø
+			// ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			mLockPatternView.setEnabled(false);
-			// Ê¹ÓÃ¼ÆÊ±Æ÷»úÐÍ¼ÆÊ±
+			// Ê¹ï¿½Ã¼ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½Ê±
 			mCountdownTimer = new CountDownTimer(
 					LockPatternUtils.FAILED_ATTEMPT_TIMEOUT_MS + 1, 1000) {
 
 				@Override
 				public void onTick(long millisUntilFinished) {
-					// ¼ÆËã¹ýÈ¥µÄÃëÊý
+					// ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					int secondsRemaining = (int) (millisUntilFinished / 1000) - 1;
-					if (secondsRemaining > 0) {// Èç¹û´óÓÚ0
-						// Ã¿¸ôÒ»Ãë¸üÐÂ¶¥²¿ÎÄ±¾ÐÅÏ¢
-						mHeadTextView.setText(secondsRemaining + " ÃëºóÖØÊÔ");
-					} else {// µ¹¼ÆÊ±½áÊø
-						mHeadTextView.setText("Çë»æÖÆÊÖÊÆÃÜÂë");
+					if (secondsRemaining > 0) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0
+						// Ã¿ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Â¶ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Ï¢
+						mHeadTextView.setText(secondsRemaining + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+					} else {// ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½
+						mHeadTextView.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 						mHeadTextView.setTextColor(Color.WHITE);
 					}
 
@@ -216,9 +216,9 @@ public class UnlockGesturePasswordActivity extends Activity {
 
 				@Override
 				public void onFinish() {
-					// ÆôÓÃÖÐ¼ä½âËøÇøÓò
+					// ï¿½ï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					mLockPatternView.setEnabled(true);
-					// ÖØÖÃÊäÈë´íÎó´ÎÊý
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					mFailedPatternAttemptsSinceLastTimeout = 0;
 				}
 			}.start();

@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity.gesturepassword;
+package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +16,15 @@ import android.widget.Toast;
 import com.lu.momeymanager.R;
 import com.lu.momeymanager.app.MomeyManagerApplication;
 import com.lu.momeymanager.util.SaveDataUtil;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternUtils;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternView;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternView.Cell;
-import com.lu.momeymanager.widget.lockpatternview.LockPatternView.DisplayMode;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.Cell;
+import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.DisplayMode;
 
 /**
- * ´´½¨ÊÖÊÆÃÜÂëÀà
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
- * @author jgduan ÊÖÊÆÃÜÂë´´½¨
+ * @author jgduan ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë´´ï¿½ï¿½
  * 
  */
 public class CreateGesturePasswordActivity extends Activity implements
@@ -32,29 +32,29 @@ public class CreateGesturePasswordActivity extends Activity implements
 	private static final int ID_EMPTY_MESSAGE = -1;
 	private static final String KEY_UI_STAGE = "uiStage";
 	private static final String KEY_PATTERN_CHOICE = "chosenPattern";
-	/** ÖÐ¼äÔ²µã½âËøÍ¼°¸ **/
+	/** ï¿½Ð¼ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ **/
 	private LockPatternView mLockPatternView;
-	/** µ×²¿ÓÒ²à°´Å¥ **/
+	/** ï¿½×²ï¿½ï¿½Ò²à°´Å¥ **/
 	private Button mFooterRightButton;
-	/** µ×²¿×ó²à°´Å¥ **/
+	/** ï¿½×²ï¿½ï¿½ï¿½à°´Å¥ **/
 	private Button mFooterLeftButton;
-	/** ¶¥²¿ÎÄ±¾ **/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ **/
 	protected TextView mHeaderText;
-	/** ÓÃÀ´ÑÝÊ¾ÈçºÎ»æÖÆ½âËøÍ¼°¸ **/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Î»ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ **/
 	private final List<LockPatternView.Cell> mAnimatePattern = new ArrayList<LockPatternView.Cell>();
-	/** ¶¥²¿ÊÓÍ¼,±ê¼ÇÒÑÉèÖÃµÄÃÜÂëÍ¼ÐÎ **/
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ **/
 	private View mPreviewViews[][] = new View[3][3];
 	protected List<LockPatternView.Cell> mChosenPattern = null;
 	private Toast mToast;
 	private Stage mUiStage = Stage.Introduction;
 
 	/**
-	 * µ×²¿×ó²à°´Å¥
+	 * ï¿½×²ï¿½ï¿½ï¿½à°´Å¥
 	 */
 	enum LeftButtonMode {
 
-		// ÔÚ²»Í¬×´Ì¬ÏÂÎª°´Å¥ÉèÖÃ²»Í¬µÄÎÄ×Ö
-		// <Cancel-È¡Ïû;CancelDisabled-½ûÓÃÈ¡Ïû;Retry-ÖØÊÔ;RetryDisabled-½ûÓÃÖØÊÔ;Gone-¹ýÈ¥µÄ>
+		// ï¿½Ú²ï¿½Í¬×´Ì¬ï¿½ï¿½Îªï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ã²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// <Cancel-È¡ï¿½ï¿½;CancelDisabled-ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½;Retry-ï¿½ï¿½ï¿½ï¿½;RetryDisabled-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;Gone-ï¿½ï¿½È¥ï¿½ï¿½>
 		Cancel(android.R.string.cancel, true), CancelDisabled(
 				android.R.string.cancel, false), Retry(
 				R.string.lockpattern_retry_button_text, true), RetryDisabled(
@@ -63,9 +63,9 @@ public class CreateGesturePasswordActivity extends Activity implements
 
 		/**
 		 * @param text
-		 *            Ö¸¶¨ÏÔÊ¾ÎÄ±¾µÄÑùÊ½
+		 *            Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 		 * @param enabled
-		 *            ÊÇ·ñ±»ÆôÓÃ
+		 *            ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
 		 */
 		LeftButtonMode(int text, boolean enabled) {
 			this.text = text;
@@ -77,12 +77,12 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * µ×²¿ÓÒ²à°´Å¥
+	 * ï¿½×²ï¿½ï¿½Ò²à°´Å¥
 	 */
 	enum RightButtonMode {
 
-		// ÔÚ²»Í¬×´Ì¬ÏÂÎª°´Å¥ÉèÖÃ²»Í¬µÄÎÄ×Ö
-		// <Continue-¼ÌÐø;ContinueDisabled-½ûÓÃ¼ÌÐø;Confirm-È·ÈÏ;ConfirmDisabled-½ûÓÃÈ·ÈÏ;Ok-¸ã¶¨>
+		// ï¿½Ú²ï¿½Í¬×´Ì¬ï¿½ï¿½Îªï¿½ï¿½Å¥ï¿½ï¿½ï¿½Ã²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		// <Continue-ï¿½ï¿½ï¿½ï¿½;ContinueDisabled-ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½;Confirm-È·ï¿½ï¿½;ConfirmDisabled-ï¿½ï¿½ï¿½ï¿½È·ï¿½ï¿½;Ok-ï¿½ã¶¨>
 		Continue(R.string.lockpattern_continue_button_text, true), 
 		ContinueDisabled(
 				R.string.lockpattern_continue_button_text, false), 
@@ -95,9 +95,9 @@ public class CreateGesturePasswordActivity extends Activity implements
 
 		/**
 		 * @param text
-		 *            Ö¸¶¨ÏÔÊ¾ÎÄ±¾µÄÑùÊ½
+		 *            Ö¸ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
 		 * @param enabled
-		 *            ÊÇ·ñ±»ÆôÓÃ
+		 *            ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
 		 */
 		RightButtonMode(int text, boolean enabled) {
 			this.text = text;
@@ -109,13 +109,13 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * ÓÃ»§¸ù¾ÝÐèÒªÑ¡Ôñ¶ÔÓ¦×´Ì¬ ÊÜ±£»¤µÄÃ¶¾ÙÀà(×÷ÓÃ·¶Î§-µ±Ç°°üÀà,²»º¬×ÓÀà)
+	 * ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÑ¡ï¿½ï¿½ï¿½Ó¦×´Ì¬ ï¿½Ü±ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Ã·ï¿½Î§-ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 	 */
 	protected enum Stage {
 
-		// ¸ù¾Ý×´Ì¬²»Í¬ÆôÓÃ°´Å¥
-		// <Introduction-³õ²½»æÖÆ;HelpScreen-°ïÖúÆÁÄ»;ChoiceTooShort-Ñ¡ÔñÌ«¶Ì;FirstChoiceValid-Ê×´ÎÑ¡ÔñÓÐÐ§;
-		// NeedToConfirm-ÔÙ´ÎÈ·ÈÏ;ChoiceConfirmed-Ñ¡ÔñÈ·ÈÏ>
+		// ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ã°ï¿½Å¥
+		// <Introduction-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½;HelpScreen-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»;ChoiceTooShort-Ñ¡ï¿½ï¿½Ì«ï¿½ï¿½;FirstChoiceValid-ï¿½×´ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½Ð§;
+		// NeedToConfirm-ï¿½Ù´ï¿½È·ï¿½ï¿½;ChoiceConfirmed-Ñ¡ï¿½ï¿½È·ï¿½ï¿½>
 		Introduction(R.string.lockpattern_recording_intro_header,
 				LeftButtonMode.Cancel, RightButtonMode.ContinueDisabled,
 				ID_EMPTY_MESSAGE, true),
@@ -145,15 +145,15 @@ public class CreateGesturePasswordActivity extends Activity implements
 
 		/**
 		 * @param headerMessage
-		 *            ÏÔÊ¾ÔÚ¶¥²¿
+		 *            ï¿½ï¿½Ê¾ï¿½Ú¶ï¿½ï¿½ï¿½
 		 * @param leftMode
-		 *            ×ó²à°´Å¥ÑùÊ½
+		 *            ï¿½ï¿½à°´Å¥ï¿½ï¿½Ê½
 		 * @param rightMode
-		 *            ÓÒ²à°´Å¥ÑùÊ½
+		 *            ï¿½Ò²à°´Å¥ï¿½ï¿½Ê½
 		 * @param footerMessage
-		 *            ÏÔÊ¾ÔÚµ×²¿
+		 *            ï¿½ï¿½Ê¾ï¿½Úµ×²ï¿½
 		 * @param patternEnabled
-		 *            ÊÇ·ñ±»ÆôÓÃ
+		 *            ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½
 		 */
 		Stage(int headerMessage, LeftButtonMode leftMode,
 				RightButtonMode rightMode, int footerMessage,
@@ -173,7 +173,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * µ¯³öÌáÊ¾ÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ï¢
 	 * 
 	 * @param message
 	 */
@@ -192,31 +192,31 @@ public class CreateGesturePasswordActivity extends Activity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gesturepassword_create);
-		// ³õÊ¼»¯ÑÝÊ¾¶¯»­--»æÖÆ½âËøÍ¼°¸
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½--ï¿½ï¿½ï¿½Æ½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 0));
 		mAnimatePattern.add(LockPatternView.Cell.of(0, 1));
 		mAnimatePattern.add(LockPatternView.Cell.of(1, 1));
 		mAnimatePattern.add(LockPatternView.Cell.of(2, 1));
 		mAnimatePattern.add(LockPatternView.Cell.of(2, 2));
 
-		// ³õÊ¼»¯ÖÐ¼ä½âËøÇøÓò
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		mLockPatternView = (LockPatternView) this
 				.findViewById(R.id.gesturepwd_create_lockview);
 		mHeaderText = (TextView) findViewById(R.id.gesturepwd_create_text);
 		mLockPatternView.setOnPatternListener(mChooseNewLockPatternListener);
 		mLockPatternView.setTactileFeedbackEnabled(true);
 
-		// ³õÊ¼»¯µ×²¿°´Å¥
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½Å¥
 		mFooterRightButton = (Button) this.findViewById(R.id.right_btn);
 		mFooterLeftButton = (Button) this.findViewById(R.id.reset_btn);
 		mFooterRightButton.setOnClickListener(this);
 		mFooterLeftButton.setOnClickListener(this);
 
-		// ³õÊ¼»¯¶¥²¿Í¼°¸
+		// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 		initPreviewViews();
 
-		// ÅÐ¶Ï±£´æÊµÀýµÄ×´Ì¬ÊÇ·ñÎª¿Õ
-		if (savedInstanceState == null) {// Èç¹ûÎª¿Õ
+		// ï¿½Ð¶Ï±ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½Ç·ï¿½Îªï¿½ï¿½
+		if (savedInstanceState == null) {// ï¿½ï¿½ï¿½Îªï¿½ï¿½
 			
 			
 			if(getIntent().getIntExtra("flag", 1)==1){
@@ -224,17 +224,17 @@ public class CreateGesturePasswordActivity extends Activity implements
 				updateStage(Stage.Introduction);
 			}else{
 				
-				// ÆôÓÃ°ïÖúÄ£Ê½
+				// ï¿½ï¿½ï¿½Ã°ï¿½ï¿½ï¿½Ä£Ê½
 				updateStage(Stage.Introduction);
 				updateStage(Stage.HelpScreen);
 			}
 			
-		} else {// Èç¹û´æÔÚÊµÀý
-			// ¶ÁÈ¡±£´æµÄ×´Ì¬
+		} else {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+			// ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 			final String patternString = savedInstanceState
 					.getString(KEY_PATTERN_CHOICE);
-			if (patternString != null) {// Èç¹û¶ÁÈ¡½á¹û²»Îª¿Õ
-				// Ö±½Ó½øÈë¶ÔÓ¦×´Ì¬-½âÃÜ
+			if (patternString != null) {// ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
+				// Ö±ï¿½Ó½ï¿½ï¿½ï¿½ï¿½Ó¦×´Ì¬-ï¿½ï¿½ï¿½ï¿½
 				mChosenPattern = LockPatternUtils
 						.stringToPattern(patternString);
 			}
@@ -244,7 +244,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * ³õÊ¼»¯¶¥²¿ÊÓÍ¼Í¼°¸
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Í¼ï¿½ï¿½
 	 */
 	private void initPreviewViews() {
 		mPreviewViews = new View[3][3];
@@ -260,7 +260,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * ÐÞ¸Ä¶¥²¿ÊÓÍ¼Í¼°¸
+	 * ï¿½Þ¸Ä¶ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Í¼ï¿½ï¿½
 	 */
 	private void updatePreviewViews() {
 		if (mChosenPattern == null)
@@ -279,8 +279,8 @@ public class CreateGesturePasswordActivity extends Activity implements
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_UI_STAGE, mUiStage.ordinal());
-		if (mChosenPattern != null) {// Èç¹ûmChosenPattern²»Îª¿Õ
-			// ±ê¼Çµ±Ç°×´Ì¬
+		if (mChosenPattern != null) {// ï¿½ï¿½ï¿½mChosenPatternï¿½ï¿½Îªï¿½ï¿½
+			// ï¿½ï¿½Çµï¿½Ç°×´Ì¬
 			outState.putString(KEY_PATTERN_CHOICE,
 					LockPatternUtils.patternToString(mChosenPattern));
 		}
@@ -289,20 +289,20 @@ public class CreateGesturePasswordActivity extends Activity implements
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-			if (mUiStage == Stage.HelpScreen) {// Èç¹ûÔÚ°ïÖú½×¶Î
-				updateStage(Stage.Introduction);// ½øÈëµ½Òýµ¼½×¶Î
+			if (mUiStage == Stage.HelpScreen) {// ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ï¿½ï¿½ï¿½×¶ï¿½
+				updateStage(Stage.Introduction);// ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½
 				return true;
 			}
 		}
 		if (keyCode == KeyEvent.KEYCODE_MENU && mUiStage == Stage.Introduction) {
-			updateStage(Stage.HelpScreen);// ½øÈëµ½°ïÖú½×¶Î
+			updateStage(Stage.HelpScreen);// ï¿½ï¿½ï¿½ëµ½ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½
 			return true;
 		}
 		return false;
 	}
 
 	/**
-	 * Í¨ÖªÇå³ýÖÐ¼äÇøÓòÍ¼°¸
+	 * Í¨Öªï¿½ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
 	 */
 	private Runnable mClearPatternRunnable = new Runnable() {
 		public void run() {
@@ -311,33 +311,33 @@ public class CreateGesturePasswordActivity extends Activity implements
 	};
 
 	/**
-	 * ¼àÌýÖÐ²¿ÇøÓòËù´¦Ä£Ê½,×ö³öÏà¹Ø¶¯×÷
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½
 	 */
 	protected LockPatternView.OnPatternListener mChooseNewLockPatternListener = new LockPatternView.OnPatternListener() {
 
 		/**
-		 * ¿ªÊ¼Ä£Ê½
+		 * ï¿½ï¿½Ê¼Ä£Ê½
 		 */
 		public void onPatternStart() {
-			// É¾³ý»Øµ÷
+			// É¾ï¿½ï¿½ï¿½Øµï¿½
 			mLockPatternView.removeCallbacks(mClearPatternRunnable);
-			patternInProgress();// ¿ªÊ¼ÉèÖÃÃÜÂë½×¶ÎÌáÊ¾ÓÃ»§
+			patternInProgress();// ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½ï¿½Ê¾ï¿½Ã»ï¿½
 		}
 
 		/**
-		 * Çå³ýÄ£Ê½
+		 * ï¿½ï¿½ï¿½Ä£Ê½
 		 */
 		public void onPatternCleared() {
 			mLockPatternView.removeCallbacks(mClearPatternRunnable);
 		}
 
 		/**
-		 * ¼ì²âÄ£Ê½
+		 * ï¿½ï¿½ï¿½Ä£Ê½
 		 */
 		public void onPatternDetected(List<LockPatternView.Cell> pattern) {
 			if (pattern == null)
 				return;
-			// ¸ù¾Ý²»Í¬½Ü×÷×ö³ö·´Ó¦
+			// ï¿½ï¿½ï¿½Ý²ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
 			if (mUiStage == Stage.NeedToConfirm
 					|| mUiStage == Stage.ConfirmWrong) {
 				if (mChosenPattern == null)
@@ -368,7 +368,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 		}
 
 		/**
-		 * ÉèÖÃÃÜÂë½×¶ÎÌáÊ¾ÓÃ»§<Í¬Ê±½ûÓÃµ×²¿°´Å¥>
+		 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½ï¿½ï¿½Ê¾ï¿½Ã»ï¿½<Í¬Ê±ï¿½ï¿½ï¿½Ãµ×²ï¿½ï¿½ï¿½Å¥>
 		 */
 		private void patternInProgress() {
 			mHeaderText.setText(R.string.lockpattern_recording_inprogress);
@@ -379,7 +379,7 @@ public class CreateGesturePasswordActivity extends Activity implements
 	};
 
 	/**
-	 * ¸üÐÂ½×¶Î
+	 * ï¿½ï¿½ï¿½Â½×¶ï¿½
 	 * 
 	 * @param stage
 	 */
@@ -413,34 +413,34 @@ public class CreateGesturePasswordActivity extends Activity implements
 		mLockPatternView.setDisplayMode(DisplayMode.Correct);
 
 		switch (mUiStage) {
-		case Introduction:// ÒýÓÃ½×¶Î
+		case Introduction:// ï¿½ï¿½ï¿½Ã½×¶ï¿½
 			mLockPatternView.clearPattern();
 			break;
-		case HelpScreen:// °ïÖú½×¶Î
+		case HelpScreen:// ï¿½ï¿½ï¿½ï¿½ï¿½×¶ï¿½
 			mLockPatternView.setPattern(DisplayMode.Animate, mAnimatePattern);
 			break;
-		case ChoiceTooShort:// Ñ¡Ôñ³¤¶È¹ý¶Ì½×¶Î
+		case ChoiceTooShort:// Ñ¡ï¿½ñ³¤¶È¹ï¿½ï¿½Ì½×¶ï¿½
 			mLockPatternView.setDisplayMode(DisplayMode.Wrong);
 			postClearPatternRunnable();
 			break;
-		case FirstChoiceValid:// µÚÒ»´ÎÉèÖÃ½×¶Î
+		case FirstChoiceValid:// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Ã½×¶ï¿½
 			break;
-		case NeedToConfirm:// µÚ¶þ´ÎÉèÖÃ½×¶Î
+		case NeedToConfirm:// ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½×¶ï¿½
 			mLockPatternView.clearPattern();
 			updatePreviewViews();
 			break;
-		case ConfirmWrong:// µÚ¶þ´Î³ö´í½×¶Î
+		case ConfirmWrong:// ï¿½Ú¶ï¿½ï¿½Î³ï¿½ï¿½ï¿½×¶ï¿½
 			mLockPatternView.setDisplayMode(DisplayMode.Wrong);
 			postClearPatternRunnable();
 			break;
-		case ChoiceConfirmed:// È·ÈÏ½×¶Î
+		case ChoiceConfirmed:// È·ï¿½Ï½×¶ï¿½
 			break;
 		}
 
 	}
 
 	/**
-	 * Çå³ý´íÎóµÄ»¨Ñù,³ý·ÇÒÑ¾­¿ªÊ¼»æÖÆÐÂµÄÍ¼Ñù
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¾ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Í¼ï¿½ï¿½
 	 */
 	private void postClearPatternRunnable() {
 		mLockPatternView.removeCallbacks(mClearPatternRunnable);
@@ -495,11 +495,11 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * ÃÜÂëÉèÖÃÍê³É
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void saveChosenPatternAndFinish() {
 		MomeyManagerApplication.getInstance().getLockPatternUtils().saveLockPattern(mChosenPattern);
-		showToast("ÃÜÂëÉèÖÃ³É¹¦");
+		showToast("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã³É¹ï¿½");
 		SaveDataUtil.setAppToBack(this, 0);
 		SaveDataUtil.setAppLock(this, 1);
 		// startActivity(new Intent(this, UnlockGesturePasswordActivity.class));

@@ -185,49 +185,6 @@ public class InOutBeanManager {
         LogUtil.d(TAG, "resolveMsgBody----------number:"+number+",data2:"+date2);
         if (resolveMsgHelp.bankNums.keySet().contains(number)) {
 
-//            if (number.equals(StringUtil.puFaNumber)) {
-//                bank = StringUtil.puFa;
-//                if (body.contains(StringUtil.pufaOutFlag1)) {
-//                    flag = StringUtil.pufaOutFlag1;
-//                    out = true;
-//                    isInAndOut = true;
-//                } else if (body.contains(StringUtil.puFaInFlag2)) {
-//                    flag = StringUtil.puFaInFlag2;
-//                    out = false;
-//                    isInAndOut = true;
-//                } else if (body.contains(StringUtil.pufaOutFlag2)) {
-//                    flag = StringUtil.pufaOutFlag2;
-//                    out = true;
-//                    isInAndOut = true;
-//                } else if (body.contains(StringUtil.puFaInFlag1)) {
-//                    flag = StringUtil.puFaInFlag1;
-//                    out = false;
-//                    isInAndOut = true;
-//                } else {
-//                    isInAndOut = false;
-//                }
-//            } else if (number.equals(StringUtil.jinHangNumber)) {
-//                bank = StringUtil.jinHang;
-//                if (body.contains(StringUtil.jianHangOutFlag)) {
-//                    flag = StringUtil.jianHangOutFlag;
-//                    out = true;
-//                    isInAndOut = true;
-//                } else if (body.contains(StringUtil.jianHangInFlag)) {
-//                    flag = StringUtil.jianHangInFlag;
-//                    out = false;
-//                    isInAndOut = true;
-//                } else {
-//                    isInAndOut = false;
-//                }
-//            } else {
-//                isInAndOut = false;
-//            }
-//            if(resolveMsgHelp.outFlags.contains())
-
-//            String flag = null;
-//            boolean out = true;
-//            String bank = null;
-//            boolean isInAndOut=false;
 
             String flag=bodyContainFlag(body,resolveMsgHelp.inFlags);
             boolean out=false;
@@ -239,9 +196,6 @@ public class InOutBeanManager {
                 String bank=resolveMsgHelp.bankNums.get(number);
                 addMoneyBean(body, flag, bank, date2, out);
             }
-//            if (isInAndOut) {
-//
-//            }
         }
     }
     private String bodyContainFlag(String body,List<String> flags){
@@ -255,10 +209,6 @@ public class InOutBeanManager {
     ResolveMsgHelp resolveMsgHelp=new ResolveMsgHelp();
     private class ResolveMsgHelp{
         ResolveMsgHelp(){
-//            Map<String,String> map1=new HashMap<>();
-//            bankNums.add(StringUtil.puFaNumber);
-//            bankNums.add(StringUtil.jinHangNumber);
-//            map1.put(StringUtil.puFaNumber, StringUtil.puFa);
             bankNums.put(StringUtil.puFaNumber,StringUtil.puFa);
             bankNums.put(StringUtil.jinHangNumber,StringUtil.jinHang);
 

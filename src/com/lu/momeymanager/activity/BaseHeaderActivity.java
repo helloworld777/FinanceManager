@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity;
+package com.lu.momeymanager.view.widget.activity;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -8,7 +8,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.momeymanager.R;
 
 /**
- * °üº¬Í·²¿µ¼º½À¸µÄ»ùÀà
+ * ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½
  * @author Administrator
  *
  */

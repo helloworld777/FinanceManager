@@ -1,4 +1,4 @@
-package com.lu.momeymanager.widget.stickylis;
+package com.lu.momeymanager.view.widget.stickylis;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.SectionIndexer;
 
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.widget.stickylis.WrapperViewList.LifeCycleListener;
+import com.lu.momeymanager.view.widget.stickylis.WrapperViewList.LifeCycleListener;
 
 /**
  * Even though this is a FrameLayout subclass we still consider it a ListView.

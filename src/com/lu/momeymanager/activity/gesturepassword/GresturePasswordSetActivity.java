@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity.gesturepassword;
+package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
 import android.content.Intent;
 import android.view.View;
@@ -11,7 +11,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.activity.BaseHeaderActivity;
+import com.lu.momeymanager.view.widget.activity.BaseHeaderActivity;
 import com.lu.momeymanager.util.SaveDataUtil;
 
 @ContentView(value = R.layout.activity_gesturepassword_set)
@@ -31,7 +31,7 @@ public class GresturePasswordSetActivity extends BaseHeaderActivity {
 	}
 	protected void initWidget() {
 		ivMore.setVisibility(View.GONE);
-		tvTitle.setText("ÊÖÊÆÃÜÂëÉèÖÃ");
+		tvTitle.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		cb_lock.setChecked(SaveDataUtil.getAppLockState(this)==1?true:false);
 		
 		rl_updatelockpassword.setVisibility(cb_lock.isChecked()?View.VISIBLE:View.INVISIBLE);

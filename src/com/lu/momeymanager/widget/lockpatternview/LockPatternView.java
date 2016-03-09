@@ -1,4 +1,4 @@
-package com.lu.momeymanager.widget.lockpatternview;
+package com.lu.momeymanager.view.widget.lockpatternview;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -172,22 +172,22 @@ public class LockPatternView extends View {
 	}
 
 	/**
-	 * ÏÔÊ¾µ±Ç°µÄÄ£Ê½
+	 * ï¿½ï¿½Ê¾ï¿½ï¿½Ç°ï¿½ï¿½Ä£Ê½
 	 */
 	public enum DisplayMode {
 
 		/**
-		 * ÕýÈ·Ä£Ê½ (i.e draw it in a friendly color)
+		 * ï¿½ï¿½È·Ä£Ê½ (i.e draw it in a friendly color)
 		 */
 		Correct,
 
 		/**
-		 * ¶¯»­Ä£Ê½ (for demo, and help).
+		 * ï¿½ï¿½ï¿½ï¿½Ä£Ê½ (for demo, and help).
 		 */
 		Animate,
 
 		/**
-		 * ´íÎóÄ£Ê½ (i.e draw a foreboding color)
+		 * ï¿½ï¿½ï¿½ï¿½Ä£Ê½ (i.e draw a foreboding color)
 		 */
 		Wrong
 	}
@@ -394,14 +394,14 @@ public class LockPatternView extends View {
 	}
 
 	/**
-	 * Çå³ý»æÖÆµÄÍ¼°¸
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Í¼ï¿½ï¿½
 	 */
 	public void clearPattern() {
 		resetPattern();
 	}
 
 	/**
-	 * ÖØÖÃËùÓÐÍ¼°¸×´Ì¬
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½×´Ì¬
 	 */
 	private void resetPattern() {
 		mPattern.clear();
@@ -411,7 +411,7 @@ public class LockPatternView extends View {
 	}
 
 	/**
-	 * Çå³ýÍ¼°¸ÁÐ±í-Í¼°¸¶¼±ê¼ÇÎªÎ´Ñ¡ÖÐ
+	 * ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½Ð±ï¿½-Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªÎ´Ñ¡ï¿½ï¿½
 	 */
 	private void clearPatternDrawLookup() {
 		for (int i = 0; i < 3; i++) {
@@ -422,14 +422,14 @@ public class LockPatternView extends View {
 	}
 
 	/**
-	 * ÏÔÊ¾Ò»ÌõÏûÏ¢£¬½«³¬Ê±Ê±£¬½ûÓÃÊäÈë
+	 * ï¿½ï¿½Ê¾Ò»ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void disableInput() {
 		mInputEnabled = false;
 	}
 
 	/**
-	 * ÆôÓÃÊäÈë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void enableInput() {
 		mInputEnabled = true;

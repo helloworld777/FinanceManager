@@ -1,4 +1,4 @@
-package com.lu.momeymanager.widget.popupwindow;
+package com.lu.momeymanager.view.widget.popupwindow;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -18,7 +18,7 @@ import de.greenrobot.event.EventBus;
 
 public class PopupWindowUtil {
 	/**
-	 * µ¯³ö´°Ìå
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private PopupWindow popupWindow;
 	
@@ -31,10 +31,10 @@ public class PopupWindowUtil {
 	}
 	
 	/**
-	 * ÏÔÊ¾µ¯³ö´°Ìå
+	 * ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param parent
-	 *            ÔÚ¸Ã¿Ø¼þÏÂÏÔÊ¾µ¯³ö´°Ìå
+	 *            ï¿½Ú¸Ã¿Ø¼ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	@SuppressWarnings("deprecation")
 	public void showWindow(View parent) {
@@ -47,9 +47,9 @@ public class PopupWindowUtil {
 			
 		}
 		popupWindow.setFocusable(true);
-		// ÉèÖÃÔÊÐíÔÚÍâµã»÷ÏûÊ§
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§
 		popupWindow.setOutsideTouchable(true);
-		popupWindow.setBackgroundDrawable(new BitmapDrawable()); // µã»÷¿Õ°×µÄµØ·½¹Ø±ÕPopupWindow
+		popupWindow.setBackgroundDrawable(new BitmapDrawable()); // ï¿½ï¿½ï¿½ï¿½Õ°×µÄµØ·ï¿½ï¿½Ø±ï¿½PopupWindow
 		popupWindow.showAsDropDown(parent);
 //		popupWindow.setAnimationStyle(R.style.popwin_anim_style);
 		popupWindow.update();
@@ -57,7 +57,7 @@ public class PopupWindowUtil {
 	}
 	
 	/**
-	 * ³õÊ¼»¯µ¯³ö´°ÌåµÄ¿Ø¼þ
+	 * ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Ø¼ï¿½
 	 * 
 	 * @param view
 	 */

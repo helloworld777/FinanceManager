@@ -1,4 +1,6 @@
 package com.lu.momeymanager.util;
+import android.annotation.SuppressLint;
+import android.util.Log;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,15 +9,17 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import android.util.Log;
 
-public class LogUtil {
+@SuppressLint("SimpleDateFormat") public class LogUtil {
+	private static final boolean DEBUG = true;
 	public static Boolean MYLOG_SWITCH = true;
 	public static Boolean MYLOG_WRITE_TO_FILE = false;
 	private static char MYLOG_TYPE = 'v';
+	@SuppressLint("SdCardPath") 
 	private static String MYLOG_PATH_SDCARD_DIR = "/sdcard/";
 	private static int SDCARD_LOG_FILE_SAVE_DAYS = 0;
 	private static String MYLOGFILEName = "musiclog.txt";
+	@SuppressLint("SimpleDateFormat") 
 	private static SimpleDateFormat myLogSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private static SimpleDateFormat logfile = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -58,10 +62,6 @@ public class LogUtil {
 	public static void v(String tag, String text) {
 		log(tag, text, 'v');
 	}
-//	public static void v(String text) {
-//		log(tag, text, 'v');
-//	}
-
 	private static void log(String tag, String msg, char level) {
 		if (MYLOG_SWITCH) {
 			if ('e' == level && ('e' == MYLOG_TYPE || 'v' == MYLOG_TYPE)) {
@@ -83,7 +83,7 @@ public class LogUtil {
 
 	public static void writeLogtoFile(String mylogtype, String tag, String text) {
 		Date nowtime = new Date();
-		String needWriteFiel = logfile.format(nowtime);
+//		String needWriteFiel = logfile.format(nowtime);
 		String needWriteMessage = myLogSdf.format(nowtime) + "    " + mylogtype + "    " + tag + "    " + text;
 		File file = new File(MYLOG_PATH_SDCARD_DIR, MYLOGFILEName);
 		Log.d("MyLog", "getAbsolutePath:" + file.getAbsolutePath());
@@ -115,4 +115,40 @@ public class LogUtil {
 		now.set(Calendar.DATE, now.get(Calendar.DATE) - SDCARD_LOG_FILE_SAVE_DAYS);
 		return now.getTime();
 	}
+	 public static void d(Class<?> class1, String msg) {
+	        if (DEBUG) {
+	            Log.d(class1.getSimpleName(), msg);
+	        }
+
+	    }
+	    public static void d(Object o, String msg) {
+	        if (DEBUG) {
+	            Log.d(o.getClass().getSimpleName(), msg);
+	        }
+
+	    }
+
+	    public static void e(Class<?> class1, String msg) {
+	        if (DEBUG) {
+	            Log.e(class1.getSimpleName(), msg);
+	        }
+	    }
+
+	    public static void i(Class<?> class1, String msg) {
+	        if (DEBUG) {
+	            Log.i(class1.getSimpleName(), msg);
+	        }
+	    }
+
+	    public static void v(Class<?> class1, String msg) {
+	        if (DEBUG) {
+	            Log.v(class1.getSimpleName(), msg);
+	        }
+	    }
+
+	    public static void w(Class<?> class1, String msg) {
+	        if (DEBUG) {
+	            Log.w(class1.getSimpleName(), msg);
+	        }
+	    }
 }

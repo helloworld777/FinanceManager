@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity;
+package com.lu.momeymanager.view.widget.activity;
 
 import android.annotation.TargetApi;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.activity.gesturepassword.CreateGesturePasswordActivity;
+import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 import com.lu.momeymanager.manager.ExcelManager;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.DialogUtil;
@@ -58,9 +58,9 @@ public class SettingActivity extends BaseHeaderActivity {
 		case R.id.rlToExcel:
 			String path=ExcelManager.excelToDisk(InOutBeanManager.getDefault().getSimilarDateMoneyBeans());
 			if(path!=null){
-				DialogUtil.showToast(getBaseContext(), "µ¼³ö³É¹¦,Â·¾¶:"+path);
+				DialogUtil.showToast(getBaseContext(), "ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½,Â·ï¿½ï¿½:"+path);
 			}else{
-				DialogUtil.showToast(getApplicationContext(), "µ¼³öÊ§°Ü");
+				DialogUtil.showToast(getApplicationContext(), "ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½");
 			}
 			break;
 		default:

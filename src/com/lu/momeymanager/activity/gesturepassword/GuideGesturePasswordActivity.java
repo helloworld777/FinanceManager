@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity.gesturepassword;
+package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,11 +10,11 @@ import com.lu.momeymanager.R;
 import com.lu.momeymanager.app.MomeyManagerApplication;
 
 /**
- * ÓÃ»§ÃÜÂëÉèÖÃÒıµ¼½çÃæ
+ * ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author jgduan
  * 
- *         ÔÚÓÃ»§³õ´Î½øÈëÓ¦ÓÃÊ±ÏÔÊ¾
+ *         ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ê±ï¿½ï¿½Ê¾
  * 
  */
 public class GuideGesturePasswordActivity extends Activity {
@@ -23,24 +23,24 @@ public class GuideGesturePasswordActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// ÉèÖÃ²¼¾Ö
+		// ï¿½ï¿½ï¿½Ã²ï¿½ï¿½ï¿½
 		setContentView(R.layout.activity_gesturepassword_guide);
 
-		// ÔÚ²¼¾ÖÖĞÕÒµ½´´½¨ÊÖÊÆÃÜÂë°´Å¥²¢ÎªÆä°ó¶¨µã»÷ÊÂ¼ş¼àÌıÆ÷
+		// ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë°´Å¥ï¿½ï¿½Îªï¿½ï¿½ó¶¨µï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		findViewById(R.id.gesturepwd_guide_btn).setOnClickListener(
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 
-						// Çå³ı±£´æ¹ıµÄÃÜÂë
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						MomeyManagerApplication.getInstance().getLockPatternUtils().clearLock();
-						// Ö¸¶¨IntentÌø×ªÄ¿±ê
+						// Ö¸ï¿½ï¿½Intentï¿½ï¿½×ªÄ¿ï¿½ï¿½
 						Intent intent = new Intent(
 								GuideGesturePasswordActivity.this,
 								CreateGesturePasswordActivity.class);
-						// ´ò¿ªĞÂµÄActivity
+						// ï¿½ï¿½ï¿½Âµï¿½Activity
 						startActivity(intent);
-						// ½áÊøµ±Ç°Activity
+						// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°Activity
 						finish();
 
 					}

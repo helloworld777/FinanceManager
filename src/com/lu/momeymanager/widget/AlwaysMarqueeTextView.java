@@ -1,4 +1,4 @@
-package com.lu.momeymanager.widget;
+package com.lu.momeymanager.view.widget;
 
 /**
  * Copyright (c) www.longdw.com
@@ -8,7 +8,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 /**
- * ¾ßÓÐÅÜÂíµÆÐ§¹ûµÄTextView
+ * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½ï¿½TextView
  * @author Administrator
  *
  */

@@ -1,4 +1,4 @@
-package com.lu.momeymanager.activity;
+package com.lu.momeymanager.view.widget.activity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -17,9 +17,9 @@ public class BaseActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		ViewUtils.inject(this);
 		
-		//Í¸Ã÷×´Ì¬À¸  
+		//Í¸ï¿½ï¿½×´Ì¬ï¿½ï¿½  
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);  
-//        //Í¸Ã÷µ¼º½À¸  
+//        //Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 	}
 	protected void startActivity(Class<?> clazz) {

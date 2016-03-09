@@ -1,4 +1,4 @@
-package com.lu.momeymanager.widget.lockpatternview;
+package com.lu.momeymanager.view.widget.lockpatternview;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,7 +16,7 @@ import android.os.FileObserver;
 import android.util.Log;
 
 /**
- * Í¼°¸½âËø¼ÓÃÜ¡¢½âÃÜ¹¤¾ßÀà
+ * Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü¡ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½
  * 
  * @author way
  * 
@@ -25,20 +25,20 @@ public class LockPatternUtils {
 	private static final String TAG = "LockPatternUtils";
 	private static final String LOCK_PATTERN_FILE = "gesture.key";
 	/**
-	 * ×î¶ÌÊäÈë³¤¶È
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½
 	 */
 	public static final int MIN_LOCK_PATTERN_SIZE = 4;
 	/**
-	 * ÃÜÂë´íÎóÊäÈë´ÎÊýÏÞÖÆ {@link #FAILED_ATTEMPT_TIMEOUT_MS}.
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ {@link #FAILED_ATTEMPT_TIMEOUT_MS}.
 	 */
 	public static final int FAILED_ATTEMPTS_BEFORE_TIMEOUT = 5;
 	/**
-	 * ×î¶ÌÊäÈë³¤¶È {@link #FAILED_ATTEMPTS_BEFORE_TIMEOUT} and
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë³¤ï¿½ï¿½ {@link #FAILED_ATTEMPTS_BEFORE_TIMEOUT} and
 	 * {@link #FAILED_ATTEMPTS_BEFORE_RESET}
 	 */
 	public static final int MIN_PATTERN_REGISTER_FAIL = MIN_LOCK_PATTERN_SIZE;
 	/**
-	 * ½âËøÊ§°Ü´ïµ½×î¸ßÏÞÖÆÊ±µ¹¼ÆÊ±Ê±³¤
+	 * ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü´ïµ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ê±Ê±ï¿½ï¿½
 	 */
 	public static final long FAILED_ATTEMPT_TIMEOUT_MS = 30000L;
 
@@ -88,14 +88,14 @@ public class LockPatternUtils {
 	}
 
 	/**
-	 * Çå³ý±£´æ¹ýµÄÃÜÂë
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	public void clearLock() {
 		saveLockPattern(null);
 	}
 
 	/**
-	 * Deserialize a pattern. ½âÃÜ,ÓÃÓÚ±£´æ×´Ì¬
+	 * Deserialize a pattern. ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½×´Ì¬
 	 * 
 	 * @param string
 	 *            The pattern serialized with {@link #patternToString}
@@ -113,7 +113,7 @@ public class LockPatternUtils {
 	}
 
 	/**
-	 * Serialize a pattern. ¼ÓÃÜ
+	 * Serialize a pattern. ï¿½ï¿½ï¿½ï¿½
 	 * 
 	 * @param pattern
 	 *            The pattern.

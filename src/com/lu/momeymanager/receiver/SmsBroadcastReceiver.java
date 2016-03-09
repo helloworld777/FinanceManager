@@ -1,4 +1,4 @@
-package com.lu.momeymanager.receiver;
+package com.lu.momeymanager.view.widget.receiver;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -68,11 +68,11 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
 			for (Object pdus : pduses) {
 				byte[] pdusmessage = (byte[]) pdus;
 				SmsMessage sms = SmsMessage.createFromPdu(pdusmessage);
-				String mobile = sms.getOriginatingAddress();// ·¢ËÍ¶ÌÐÅµÄÊÖ»úºÅÂë
-				String body = sms.getMessageBody(); // ¶ÌÐÅÄÚÈÝ
+				String mobile = sms.getOriginatingAddress();// ï¿½ï¿½ï¿½Í¶ï¿½ï¿½Åµï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½
+				String body = sms.getMessageBody(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				Date date = new Date(sms.getTimestampMillis());
 				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-				String time = format.format(date); // µÃµ½·¢ËÍÊ±¼ä
+				String time = format.format(date); // ï¿½Ãµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 				if (mobile.equals(puFaNumber) || mobile.equals(jinHangNumber)) {
 					boolean b = false;
 					String flag = "";

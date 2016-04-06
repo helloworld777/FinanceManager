@@ -2,22 +2,22 @@ package com.lu.momeymanager.view.widget.activity;
 
 import android.annotation.TargetApi;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.financemanager.R;
 import com.lu.momeymanager.manager.ExcelManager;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.DialogUtil;
-import com.lu.momeymanager.util.SaveDataUtil;
+import com.lu.momeymanager.view.widget.SildingFinishLayout;
 import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 
-@ContentView(R.layout.activity_setting)
+//@ContentView(R.layout.activity_setting)
 public class SettingActivity extends BaseHeaderActivity {
 	@ViewInject(value = R.id.ivMore)
 	protected ImageView ivMore;
@@ -37,11 +37,18 @@ public class SettingActivity extends BaseHeaderActivity {
 	@ViewInject(value = R.id.rlToExcel)
 	protected RelativeLayout rlToExcel;
 
+//	@ViewInject(R.id.sildingFinishLayout)
+//	private SildingFinishLayout sildingFinishLayout;
 	@Override
 	@TargetApi(19)
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		initWidget();
+		SildingFinishLayout sildingFinishLayout = (SildingFinishLayout) LayoutInflater.from(this).inflate(
+				R.layout.base, null);
+		sildingFinishLayout.attachToActivity(this);
+
+		setContentView(R.layout.activity_setting);
+//		initWidget();
 	}
 
 	@com.lidroid.xutils.view.annotation.event.OnClick({ R.id.rlLockpasswordstate ,R.id.ivBack,R.id.rlToExcel})
@@ -69,7 +76,7 @@ public class SettingActivity extends BaseHeaderActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		tvLockpasswordstate.setText(SaveDataUtil.getAppLockState(this) == 1 ? getString(R.string.already_setting) : getString(R.string.no_setting));
+//		tvLockpasswordstate.setText(SaveDataUtil.getAppLockState(this) == 1 ? getString(R.string.already_setting) : getString(R.string.no_setting));
 	}
 
 	private void initWidget() {

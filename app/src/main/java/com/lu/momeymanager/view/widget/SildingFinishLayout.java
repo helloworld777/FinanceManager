@@ -1,13 +1,19 @@
 package com.lu.momeymanager.view.widget;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
+import com.lu.financemanager.R;
 import com.lu.momeymanager.util.Debug;
 
 /**
@@ -31,8 +37,9 @@ public class SildingFinishLayout extends RelativeLayout {
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         d("mTouchSlop:" + mTouchSlop);
         mScroller = new Scroller(context);
+        mShadowDrawable = getResources().getDrawable(R.drawable.shadow_left);
     }
-
+    private View mContentView;
     private int lastX;
     private boolean isSlop = false;
 
@@ -97,7 +104,42 @@ public class SildingFinishLayout extends RelativeLayout {
             }
         }
     }
+    public void attachToActivity(Activity activity) {
+//        mActivity = activity;
+        TypedArray a = activity.getTheme().obtainStyledAttributes(
+                new int[] { android.R.attr.windowBackground });
+        int background = a.getResourceId(0, 0);
+        a.recycle();
 
+        ViewGroup decor = (ViewGroup) activity.getWindow().getDecorView();
+        ViewGroup decorChild = (ViewGroup) decor.getChildAt(0);
+        decorChild.setBackgroundResource(background);
+        decor.removeView(decorChild);
+        addView(decorChild);
+        setContentView(decorChild);
+        decor.addView(this);
+    }
+    private Drawable mShadowDrawable;
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        if (mShadowDrawable != null && mContentView != null) {
+
+            int left = mContentView.getLeft()
+                    - mShadowDrawable.getIntrinsicWidth();
+            int right = left + mShadowDrawable.getIntrinsicWidth();
+            int top = mContentView.getTop();
+            int bottom = mContentView.getBottom();
+
+            mShadowDrawable.setBounds(left, top, right, bottom);
+            mShadowDrawable.draw(canvas);
+        }
+
+    }
+
+    private void setContentView(View decorChild) {
+        mContentView = (View) decorChild.getParent();
+    }
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

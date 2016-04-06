@@ -3,12 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#66aaff"
-    android:clipToPadding="true"
-    android:fitsSystemWindows="true" >
+
+     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/header_height"
+        android:layout_marginTop="@dimen/size10dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp" >
 
@@ -20,13 +21,12 @@
             android:background="@drawable/selector_music_btn"
             android:src="@drawable/ic_common_title_bar_back" />
 
-        <com.lu.momeymanager.view.widget.AlwaysMarqueeTextView
+        <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="10dp"
             android:singleLine="true"
             android:text="@string/all_consume"
             android:textColor="#ffffff"
@@ -47,7 +47,9 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/ivMore"
-            android:text="refresh" />
+            android:background="@drawable/selector_music_btn"
+            android:visibility="gone"
+            android:text="backup" />
     </RelativeLayout>
 
 </RelativeLayout>

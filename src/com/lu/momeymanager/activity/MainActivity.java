@@ -17,14 +17,14 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.view.widget.activity.gesturepassword.UnlockGesturePasswordActivity;
 import com.lu.momeymanager.bean.BaseEvent;
 import com.lu.momeymanager.bean.SimilarDateMoneyBean;
-import com.lu.momeymanager.view.widget.fragment.DetailMouthMoneyFragment;
-import com.lu.momeymanager.view.widget.fragment.MouthMoneyFragment;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.LogUtil;
 import com.lu.momeymanager.util.SaveDataUtil;
+import com.lu.momeymanager.view.widget.activity.gesturepassword.UnlockGesturePasswordActivity;
+import com.lu.momeymanager.view.widget.fragment.DetailMouthMoneyFragment;
+import com.lu.momeymanager.view.widget.fragment.MouthMoneyFragment;
 import com.lu.momeymanager.view.widget.popupwindow.PopupWindowUtil;
 
 import de.greenrobot.event.EventBus;
@@ -60,10 +60,8 @@ public class MainActivity extends BaseFragmentActivity {
 	@Override
 	protected void initWidget() {
 		
-		// ͸��״̬��
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
-		// //͸��������
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 		
 		fragment = new MouthMoneyFragment();
@@ -159,8 +157,6 @@ public class MainActivity extends BaseFragmentActivity {
 	public void onBackPressed() {
 		super.onBackPressed();
 		homeTitle();
-//		fragment = new MouthMoneyFragment();
-//		replaceFragment(false);
 	}
 	@Override
 	protected void onDestroy() {

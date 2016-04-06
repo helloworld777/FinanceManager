@@ -11,8 +11,8 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.view.widget.activity.BaseHeaderActivity;
 import com.lu.momeymanager.util.SaveDataUtil;
+import com.lu.momeymanager.view.widget.activity.BaseHeaderActivity;
 
 @ContentView(value = R.layout.activity_gesturepassword_set)
 public class GresturePasswordSetActivity extends BaseHeaderActivity {

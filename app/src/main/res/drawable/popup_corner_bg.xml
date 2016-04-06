@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 设置圆角矩形的半径 -->
+    <corners android:radius="@dimen/size5dp"/>
+    <!-- 设置矩形的内部填充色 -->
+    <solid android:color="@color/white"/>
+    <!-- 设置矩形的边框大小和颜色 -->
+    <stroke android:width="@dimen/size1dp" android:color="@color/light_grey"/>
+</shape>

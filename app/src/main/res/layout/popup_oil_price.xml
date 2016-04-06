@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/popup_corner_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/size20dp"
+        android:text="username"
+        android:textSize="@dimen/size20sp" />
+
+    <EditText
+        android:id="@+id/etOilPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/popup_corner_bg"
+        android:padding="@dimen/size10dip"
+        android:text="0"
+        android:layout_margin="@dimen/size10dip"
+        android:textSize="@dimen/size20sp" />
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size1dp"
+        android:background="@color/line"
+        android:textSize="@dimen/size25sp"
+
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_popup_btn_bg"
+            android:text="取消" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="@dimen/size50dp"
+            android:layout_weight="0"
+            android:background="@color/line"
+            android:textSize="@dimen/size25sp"
+
+            />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_popup_btn_bg"
+            android:text="确定" />
+    </LinearLayout>
+</LinearLayout>

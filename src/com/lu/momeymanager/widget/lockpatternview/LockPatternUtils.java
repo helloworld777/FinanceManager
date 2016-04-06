@@ -1,5 +1,9 @@
 package com.lu.momeymanager.view.widget.lockpatternview;
 
+import android.content.Context;
+import android.os.FileObserver;
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,10 +14,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import android.content.Context;
-import android.os.FileObserver;
-import android.util.Log;
 
 /**
  * ͼ���������ܡ����ܹ�����

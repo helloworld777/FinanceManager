@@ -61,5 +61,24 @@
             android:text="@string/balance_query"
             android:textSize="@dimen/menu_item_text_size" />
     </LinearLayout>
-
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvBackup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="backup"
+        android:background="@drawable/selector_bg"
+        android:textSize="@dimen/menu_item_text_size" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/tvBackupContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="backup contact"
+        android:background="@drawable/selector_bg"
+        android:textSize="@dimen/menu_item_text_size" />
 </LinearLayout>

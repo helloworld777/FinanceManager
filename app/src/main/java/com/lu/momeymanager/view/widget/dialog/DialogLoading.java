@@ -11,11 +11,7 @@ import com.lu.financemanager.R;
 
 
 /**
- * @ClassName: DialogLoading
- * @Description: 得到自定义的progressDialog
- * @author zyx
- * @date 2014-7-8 上午9:46:36
- * 
+ *
  */
 public class DialogLoading extends AlertDialog {
 	private Context mContext;

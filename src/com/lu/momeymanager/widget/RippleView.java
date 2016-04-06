@@ -25,8 +25,6 @@
 package com.lu.momeymanager.view.widget;
 
 
-import com.lu.momeymanager.R;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -45,6 +43,8 @@ import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import com.lu.momeymanager.R;
 
 
 /****

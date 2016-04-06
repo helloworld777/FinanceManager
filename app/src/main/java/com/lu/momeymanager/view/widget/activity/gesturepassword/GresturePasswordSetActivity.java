@@ -31,7 +31,7 @@ public class GresturePasswordSetActivity extends BaseHeaderActivity {
 	}
 	protected void initWidget() {
 		ivMore.setVisibility(View.GONE);
-		tvTitle.setText("������������");
+		tvTitle.setText("setPassword");
 		cb_lock.setChecked(SaveDataUtil.getAppLockState(this)==1?true:false);
 		
 		rl_updatelockpassword.setVisibility(cb_lock.isChecked()?View.VISIBLE:View.INVISIBLE);

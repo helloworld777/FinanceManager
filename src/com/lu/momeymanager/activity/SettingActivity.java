@@ -11,11 +11,11 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 import com.lu.momeymanager.manager.ExcelManager;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.DialogUtil;
 import com.lu.momeymanager.util.SaveDataUtil;
+import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 
 @ContentView(R.layout.activity_setting)
 public class SettingActivity extends BaseHeaderActivity {

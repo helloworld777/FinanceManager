@@ -22,10 +22,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ��������������
- * 
- * @author jgduan �������봴��
- * 
+ *
+ *
  */
 public class CreateGesturePasswordActivity extends Activity implements
 		OnClickListener {
@@ -375,7 +373,6 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * ������Ļ���,����Ѿ���ʼ�����µ�ͼ��
 	 */
 	private void postClearPatternRunnable() {
 		mLockPatternView.removeCallbacks(mClearPatternRunnable);
@@ -430,11 +427,10 @@ public class CreateGesturePasswordActivity extends Activity implements
 	}
 
 	/**
-	 * �����������
 	 */
 	private void saveChosenPatternAndFinish() {
 		MomeyManagerApplication.getInstance().getLockPatternUtils().saveLockPattern(mChosenPattern);
-		showToast("�������óɹ�");
+		showToast("saveSuceess");
 		SaveDataUtil.setAppToBack(this, 0);
 		SaveDataUtil.setAppLock(this, 1);
 		// startActivity(new Intent(this, UnlockGesturePasswordActivity.class));

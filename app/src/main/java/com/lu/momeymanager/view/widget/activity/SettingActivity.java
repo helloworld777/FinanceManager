@@ -11,11 +11,11 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.financemanager.R;
-import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 import com.lu.momeymanager.manager.ExcelManager;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.DialogUtil;
 import com.lu.momeymanager.util.SaveDataUtil;
+import com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity;
 
 @ContentView(R.layout.activity_setting)
 public class SettingActivity extends BaseHeaderActivity {
@@ -40,9 +40,7 @@ public class SettingActivity extends BaseHeaderActivity {
 	@Override
 	@TargetApi(19)
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-
 		initWidget();
 	}
 
@@ -68,13 +66,15 @@ public class SettingActivity extends BaseHeaderActivity {
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		tvLockpasswordstate.setText(SaveDataUtil.getAppLockState(this) == 1 ? getString(R.string.already_setting) : getString(R.string.no_setting));
+	}
+
 	private void initWidget() {
-		// TODO Auto-generated method stub
 		ivMore.setVisibility(View.GONE);
 		tvTitle.setText(getString(R.string.setting));
 		btnRefresh.setVisibility(View.GONE);
-
-		tvLockpasswordstate.setText(SaveDataUtil.getAppLockState(this) == 1 ? getString(R.string.already_setting) : getString(R.string.no_setting));
-
 	}
 }

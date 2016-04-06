@@ -15,7 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:orientation="vertical" >
 
-        <com.goopai.nazhijie.app.notice.ProgressWheel
+        <com.lu.momeymanager.view.widget.dialog.ProgressWheel
             android:id="@+id/progress_wheel"
             android:layout_width="80dp"
             android:layout_height="80dp"

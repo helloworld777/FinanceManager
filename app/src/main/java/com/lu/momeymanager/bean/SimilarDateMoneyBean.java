@@ -3,8 +3,6 @@ package com.lu.momeymanager.bean;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import com.lu.momeymanager.util.FormatUti;
-
 public class SimilarDateMoneyBean {
 	private String date;
 	private List<InOutBean> beans;
@@ -48,7 +46,6 @@ public class SimilarDateMoneyBean {
 			}
 
 		}
-//		decimalFormat.format(i);
 		return i;
 	}
 

@@ -1,8 +1,5 @@
 package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,6 +17,9 @@ import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.Cell;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.DisplayMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ��������������

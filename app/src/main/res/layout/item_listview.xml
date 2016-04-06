@@ -1,45 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rl_item"
-	android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
+    android:orientation="vertical"
     android:padding="10dp">
-    
-	<TextView
-	    android:id="@+id/tvMumber"
-	    android:layout_height="wrap_content"
-	    android:layout_width="wrap_content"
-	    android:text="10"
-	    android:textSize="25sp"
-	    />
-	<TextView
-	    android:id="@+id/tvBank"
-	    android:layout_height="wrap_content"
-	    android:layout_width="wrap_content"
-	    android:layout_below="@+id/tvMumber"
-	    android:text="10"
-	    android:textColor="#a0a0a0"
-	    />
-	<TextView
-	    android:id="@+id/tvCarNumber"
-	    android:layout_height="wrap_content"
-	    android:layout_width="wrap_content"
-	    android:layout_below="@+id/tvMumber"
-	    android:layout_toRightOf="@+id/tvBank"
-	    android:layout_marginLeft="5dp"
-	    android:text="93355"
-	    android:textColor="#a0a0a0"
-	    />
-	<TextView
-	    android:id="@+id/tvDate"
-	    android:layout_height="wrap_content"
-	    android:layout_width="wrap_content"
-	    android:layout_centerVertical="true"
-	    android:layout_alignParentRight="true"
-	    android:text="2010"
-	    android:textColor="#a0a0a0"
-	    />
-	
-	
-</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvMumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/tvBank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMumber"
+            android:text="10"
+            android:textColor="#a0a0a0" />
+
+        <TextView
+            android:id="@+id/tvCarNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMumber"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tvBank"
+            android:text="93355"
+            android:textColor="#a0a0a0" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2010"
+            android:textColor="#a0a0a0" />
+    </RelativeLayout>
+    <View android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/grey2"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone"
+        />
+    <TextView
+        android:id="@+id/tvDetail"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvCarNumber"
+        android:maxLines="5"
+        android:visibility="gone"
+        android:text="@string/detail" />
+</LinearLayout>

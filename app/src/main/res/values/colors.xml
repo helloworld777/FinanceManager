@@ -25,4 +25,72 @@
 
     <color name="menu_bg">#eeeeee</color>
     <color name="menu_item_bg">#e0e0e0</color>
+
+    <color name="deep_blue">#27A0C0</color>
+    <color name="blue">#0098FF</color>
+    <color name="light_blue">#9DFFFF</color>
+    <color name="white">#ffffff</color>
+    <color name="grey2">#D1D1D1</color>
+    <color name="grey">#9A9A9A</color>
+    <color name="deep_grey">#5D5D5D</color>
+    <color name="light_grey2">#CBCBCB</color>
+    <color name="light_grey">#E8E8E8</color>
+    <color name="drak_black">#0C1A25</color>
+
+    <color name="green">#00FFFF</color>
+    <color name="deep_green">#4CD964</color>
+
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="result_view">#b0000000</color>
+    <color name="possible_result_points">#c0ffff00</color>
+    <color name="middlegold">#BB8461</color>
+    <color name="drak_green">#33FF00</color>
+    <color name="drak_blue">#089BBF</color>
+    <color name="yellow">#FFFFCC</color>
+    <color name="orange">#ec4018</color>
+    <color name="orange2">#EF826E</color>
+    <color name="yellow_white">#F8F8F8</color>
+    <color name="red">#EC4018</color>
+    <color name="cloud_background_color">#162029</color>
+    <color name="dialog_background_color">#00000000</color>
+    <color name="anim_start_background_color">#0B141D</color>
+    <color name="ad_background">#88000000</color>
+    <color name="black">#070F15</color>
+    <color name="login_black">#3A3C3B</color>
+    <color name="griditems_bg">#ffe8ecef</color>
+    <color name="commo_text_color">#ff333333</color>
+    <color name="line">#ffd3dde6</color>
+
+    <color name="c333">#333</color>
+    <color name="c666">#666</color>
+    <color name="c999">#999</color>
+
+    <color name="c_ec4018">#ec4018</color>
+    <color name="c_4491d3">#4491d3</color>
+    <color name="c_0588cb">#0588cb</color>
+    <color name="c_dceef8">#dceef8</color>
+
+    <color name="black_need">#333333</color>
+    <color name="gay_need">#eeeeee</color>
+    <!-- 设置的背景色 -->
+    <color name="setting_background">#EEEEEE</color>
+
+    <color name="yellows">#f5b434</color>
+    <color name="assist_blue">#4a96fd</color>
+    <color name="color_selector_tag_text">#4a96fd</color>
+    <color name="color_default_tag_text">#666</color>
+
+    <color name="addresslist_textcolor">#A9A9A9</color>
+    <color name="third_carselector_word">#666666</color>
+    <color name="third_carselector_bg">#fafafa</color>
+    <color name="line_carselector">#eeeeee</color>
+    <color name="second_carselector_bg">#ffffff</color>
+    <color name="second_carselector_word">#666666</color>
+    <color name="carchoice_second_bg">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="popup_car_condition_stroke_bg_btn">#f0f0f0</color>
+
+
+    <color name="comment_name">#00CDCD</color>
 </resources>

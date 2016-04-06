@@ -123,7 +123,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 				mLockPatternView
 						.setDisplayMode(LockPatternView.DisplayMode.Wrong);
 
-				if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {// ���볤�ȴﵽ���Ҫ��
+				if (pattern.size() >= LockPatternUtils.MIN_PATTERN_REGISTER_FAIL) {//
 
 					mFailedPatternAttemptsSinceLastTimeout++;
 					int retry = LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT
@@ -140,7 +140,7 @@ public class UnlockGesturePasswordActivity extends Activity {
 					showToast("v");
 				}
 
-				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {// �������ﵽ�������
+				if (mFailedPatternAttemptsSinceLastTimeout >= LockPatternUtils.FAILED_ATTEMPTS_BEFORE_TIMEOUT) {//
 					mHandler.postDelayed(attemptLockout, 2000);
 
 				} else {

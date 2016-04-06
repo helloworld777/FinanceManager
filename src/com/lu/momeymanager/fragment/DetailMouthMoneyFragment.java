@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.lu.momeymanager.R;
-import com.lu.momeymanager.view.widget.adapter.LuAdapter;
-import com.lu.momeymanager.view.widget.adapter.ViewHolder;
 import com.lu.momeymanager.bean.InOutBean;
 import com.lu.momeymanager.bean.SimilarDateMoneyBean;
 import com.lu.momeymanager.manager.InOutBeanManager;
+import com.lu.momeymanager.view.widget.adapter.LuAdapter;
+import com.lu.momeymanager.view.widget.adapter.ViewHolder;
 
 public class DetailMouthMoneyFragment extends BaseFragment {
 

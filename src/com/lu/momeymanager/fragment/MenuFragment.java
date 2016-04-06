@@ -1,15 +1,15 @@
 package com.lu.momeymanager.view.widget.fragment;
 
-import com.lu.momeymanager.R;
-import com.lu.momeymanager.view.widget.activity.BalanceQueryActivity;
-import com.lu.momeymanager.view.widget.activity.SettingActivity;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.lu.momeymanager.R;
+import com.lu.momeymanager.view.widget.activity.BalanceQueryActivity;
+import com.lu.momeymanager.view.widget.activity.SettingActivity;
 
 public class MenuFragment extends BaseFragment{
 	private LinearLayout llSetting,llBalance;

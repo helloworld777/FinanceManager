@@ -1,8 +1,5 @@
 package com.lu.momeymanager.view.widget.adapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +10,9 @@ import android.widget.TextView;
 import com.lu.momeymanager.R;
 import com.lu.momeymanager.bean.InOutBean;
 import com.lu.momeymanager.view.widget.stickylis.StickyListHeadersAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StickyListAdapter extends LuAdapter<InOutBean>implements StickyListHeadersAdapter, SectionIndexer{
 	private String[] mSectionLetters;

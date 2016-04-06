@@ -12,6 +12,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.lu.financemanager.R;
+import com.lu.momeymanager.app.MomeyManagerApplication;
 import com.lu.momeymanager.bean.BalanceBean;
 import com.lu.momeymanager.bean.BaseEvent;
 import com.lu.momeymanager.bean.InOutBean;
@@ -39,9 +40,6 @@ public class InOutBeanManager {
         return balanceBeans;
     }
 
-    public void setBalanceBeans(List<BalanceBean> balanceBeans) {
-        this.balanceBeans = balanceBeans;
-    }
 
     private int sort = 0;
 
@@ -59,14 +57,10 @@ public class InOutBeanManager {
     }
 
     public static InOutBeanManager getDefault() {
-        // if (smsManager == null) {
-        // smsManager = new SmsManager();
-        // }
         return smsManager;
     }
 
     public void queryBalance() {
-
         if (balanceBeans.size() > 0) {
             return;
         }
@@ -90,14 +84,12 @@ public class InOutBeanManager {
                     phone = StringUtil.puFaNumber;
                 }
                 sendQueryBalanceMsg(phone, msg);
-
             }
         }
         cursor.close();
     }
 
     private void sendQueryBalanceMsg(String phone, String message) {
-        LogUtil.d(TAG, "phone:" + phone + "message:" + message);
         PendingIntent pi = PendingIntent.getActivity(mContext, 0, new Intent(), 0);
 
         android.telephony.SmsManager smsManager = android.telephony.SmsManager.getDefault();
@@ -133,12 +125,30 @@ public class InOutBeanManager {
 
     //	private String weiHao;
     private Uri SMS_INBOX = Uri.parse("content://sms/");
-
-    // public void getBalance(){
-    // balanceBeans.clear();
-    // * CREATE TABLE bank (" + "_id INTEGER NOT NULL PRIMARY KEY
-    // * AUTOINCREMENT," +"bank VARCHAR(100
-    // }
+/**
+ 02
+ * 所有的短信
+ 03
+ */
+    public static final String SMS_URI_ALL = "content://sms/";
+/**
+ 06
+ * 收件箱短信
+ 07
+ */
+    public static final Uri SMS_URI_INBOX =  Uri.parse("content://sms/inbox");
+/**
+ 10
+ * 已发送短信
+ 11
+ */
+    public static final String SMS_URI_SEND = "content://sms/sent";
+/**
+ 14
+ * 草稿箱短信
+ 15
+ */
+    public static final String SMS_URI_DRAFT = "content://sms/draft";
 
     private void clearData() {
 
@@ -159,14 +169,19 @@ public class InOutBeanManager {
         LogUtil.d(TAG, "*************" + DBHelper.TABLE_NAME + " data:" + cursor.getCount());
         if (cursor.getCount() > 0) {
             addSimilarMoneyBeanFromDb(cursor);
+            cursor.close();
+            long end = System.currentTimeMillis();
+            LogUtil.d(TAG, "*****************local db getSmsFromPhone:" + (end - start) / 1000.0 + "s");
+            LogUtil.d(TAG, "*****************moneyBeans.size():" +moneyBeans.size());
+            LogUtil.d(TAG, "*****************similarDateMoneyBeans.size():" +similarDateMoneyBeans.size());
             return;
         }
         ContentResolver cr = mContext.getContentResolver();
-        Cursor cur = cr.query(SMS_INBOX, null, "address=? or address=?", new String[]{StringUtil.puFaNumber, StringUtil.jinHangNumber}, null);
+        Cursor cur = cr.query(SMS_URI_INBOX, null, "address=? or address=?", new String[]{StringUtil.puFaNumber, StringUtil.jinHangNumber}, null);
         if (null == cur) {
             return;
         }
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm");
         LogUtil.d(TAG, "count:" + cur.getCount());
         while (cur.moveToNext()) {
             String number = cur.getString(cur.getColumnIndex("address"));//
@@ -174,17 +189,18 @@ public class InOutBeanManager {
             long date = cur.getLong(cur.getColumnIndex("date"));
             String date2 = format.format(new Date(date));
             long id = cur.getLong(cur.getColumnIndex("_id"));
-//            LogUtil.d(TAG, "date:" + date2 + ",_id:" + id);
             resolveMsgBody(number, body, date2);
         }
+        cur.close();
         long end = System.currentTimeMillis();
         LogUtil.d(TAG, "*****************getSmsFromPhone:" + (end - start) / 1000.0 + "s");
+        LogUtil.d(TAG, "*****************moneyBeans.size():" +moneyBeans.size());
+        LogUtil.d(TAG, "*****************similarDateMoneyBeans.size():" +similarDateMoneyBeans.size());
     }
 
     private void resolveMsgBody(String number, String body, String date2) {
-        LogUtil.d(TAG, "resolveMsgBody----------number:"+number+",data2:"+date2);
+//        LogUtil.d(TAG, "resolveMsgBody----------number:"+number+",data2:"+date2);
         if (resolveMsgHelp.bankNums.keySet().contains(number)) {
-
 
             String flag=bodyContainFlag(body,resolveMsgHelp.inFlags);
             boolean out=false;
@@ -211,7 +227,6 @@ public class InOutBeanManager {
         ResolveMsgHelp(){
             bankNums.put(StringUtil.puFaNumber,StringUtil.puFa);
             bankNums.put(StringUtil.jinHangNumber,StringUtil.jinHang);
-
             inFlags.add(StringUtil.puFaInFlag1);
             inFlags.add(StringUtil.puFaInFlag2);
             inFlags.add(StringUtil.jianHangInFlag);
@@ -221,7 +236,6 @@ public class InOutBeanManager {
             outFlags.add(StringUtil.pufaOutFlag2);
 
         }
-//        List<Map<String,String>> bankNums=new ArrayList<>();
         Map<String,String> bankNums=new HashMap<>();
         List<String> inFlags=new ArrayList<>();
         List<String> outFlags=new ArrayList<>();
@@ -256,10 +270,11 @@ public class InOutBeanManager {
             String date = cursor.getString(cursor.getColumnIndex("date"));
             String note = cursor.getString(cursor.getColumnIndex("note"));
             String cardNumber = cursor.getString(cursor.getColumnIndex("cardNumber"));
-            InOutBean moneyBean = new InOutBean(number + "", note, date, bank, number, cardNumber);
+            String detail=cursor.getString(cursor.getColumnIndex("detail"));
+            InOutBean moneyBean = new InOutBean(number + "", note, date, bank, number, cardNumber,detail, MomeyManagerApplication.getDefault().getUsername());
             addSimilarMoneyBean(moneyBean);
         }
-        cursor.close();
+//        cursor.close();
     }
 
     private void addBalanceFromDb(Cursor cursor2) {
@@ -278,19 +293,19 @@ public class InOutBeanManager {
         String[] strings = new String[2];
         String str = body.substring(body.indexOf(flag));
 
-        LogUtil.d(TAG, "str:" + str + ",flag:" + flag);
+//        LogUtil.d(TAG, "str:" + str + ",flag:" + flag);
 
         if (flag.equals(StringUtil.balance)) {
             if (str.charAt(flag.length()) < '0' || str.charAt(flag.length()) > '9') {
 
-                LogUtil.d(TAG, "first latter:" + str.charAt(flag.length()));
+//                LogUtil.d(TAG, "first latter:" + str.charAt(flag.length()));
                 return null;
             }
         }
         int index = str.indexOf(".");
         if (index == -1)
             return null;
-        LogUtil.d(TAG, "index:" + index);
+//        LogUtil.d(TAG, "index:" + index);
         String str2 = str.substring(flag.length(), index + 2);
 
         int weiHaoIndex = body.indexOf(StringUtil.weiHao);
@@ -310,11 +325,8 @@ public class InOutBeanManager {
             }
             number = Double.valueOf(new String(sBuffer));
         }
-        // if (number == 0) {
-        // return;
-        // }
         if (b) {
-            str2 = "-" + str2;
+//            str2 = "-" + str2;
             number = -number;
         }
         strings[1] = "" + number;
@@ -329,7 +341,8 @@ public class InOutBeanManager {
 
     public InOutBean resolveMsgToMoneyBean(String body, String flag, String bank, String date, boolean out) {
         String[] str2 = resolverMsg(body, flag, out);
-        return str2 == null ? null : new InOutBean(str2[0], "", date, bank, Double.valueOf(str2[1]), str2[0]);
+
+        return str2 == null ? null : new InOutBean(str2[0], "", date, bank, Double.valueOf(str2[1]), str2[0],body,MomeyManagerApplication.getDefault().getUsername());
     }
 
     /**
@@ -353,6 +366,7 @@ public class InOutBeanManager {
         }
 
         if (cursor.getCount() > 0) {
+            cursor.close();
         } else {
             ContentValues cValues = new ContentValues();
             cValues.put("balance", balanceBean.getNumber());
@@ -391,12 +405,17 @@ public class InOutBeanManager {
         cValues.put("cardNumber", moneyBean.getCardNumber());
         cValues.put("date", moneyBean.getDate());
         cValues.put("note", "");
+        cValues.put("detail",moneyBean.detail);
         database.insert(DBHelper.TABLE_NAME, null, cValues);
-        LogUtil.d("SmsBroadcastReceiver", "*********insert into moneyBean a data");
+//        LogUtil.d("SmsBroadcastReceiver", "*********insert into moneyBean a data");
     }
 
     private void addSimilarMoneyBean(InOutBean bean) {
         boolean isHas = false;
+        if(!moneyBeans.contains(bean)){
+            moneyBeans.add(bean);
+        }
+
         for (SimilarDateMoneyBean oldSimilarDateMoneyBean : similarDateMoneyBeans) {
             oldSimilarDateMoneyBean.setSort(sort);
             if (oldSimilarDateMoneyBean.isSimilar(bean)) {
@@ -407,9 +426,9 @@ public class InOutBeanManager {
             }
         }
         if (!isHas) {
-            List<InOutBean> moneyBeans = new ArrayList<InOutBean>();
-            moneyBeans.add(bean);
-            similarDateMoneyBeans.add(new SimilarDateMoneyBean(bean.getDate().substring(0, 7), moneyBeans));
+            List<InOutBean> tempmoneyBeans = new ArrayList<>();
+            tempmoneyBeans.add(bean);
+            similarDateMoneyBeans.add(new SimilarDateMoneyBean(bean.getDate().substring(0, 7), tempmoneyBeans));
         }
     }
 

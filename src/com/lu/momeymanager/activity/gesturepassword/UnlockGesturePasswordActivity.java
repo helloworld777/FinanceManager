@@ -1,14 +1,10 @@
 package com.lu.momeymanager.view.widget.activity.gesturepassword;
 
-import java.util.List;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.Process;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Window;
@@ -25,6 +21,8 @@ import com.lu.momeymanager.util.SaveDataUtil;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView;
 import com.lu.momeymanager.view.widget.lockpatternview.LockPatternView.Cell;
+
+import java.util.List;
 
 public class UnlockGesturePasswordActivity extends Activity {
 	/** �м����ͼ�� **/

@@ -1,8 +1,5 @@
 package com.lu.momeymanager.view.widget.lockpatternview;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -25,6 +22,9 @@ import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 
 import com.lu.momeymanager.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**

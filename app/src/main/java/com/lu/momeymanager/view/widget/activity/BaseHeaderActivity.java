@@ -8,7 +8,6 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lu.financemanager.R;
 
 /**
- * ��ͷ���������Ļ���
  * @author Administrator
  *
  */

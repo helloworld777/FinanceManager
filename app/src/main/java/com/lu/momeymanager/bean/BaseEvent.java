@@ -1,12 +1,14 @@
 package com.lu.momeymanager.bean;
 
 
+import com.lu.momeymanager.util.Constant;
 
-public class BaseEvent{
+public class BaseEvent implements Constant{
 	private Object data;
 	public final static int CHANGE_FRAGMENT=0;
 	public final static int UPDATE_MAIN=1;
 	public final static int UPDATE_BALANCE=2;
+
 	private int eventType;
 	public Object getData() {
 		return data;

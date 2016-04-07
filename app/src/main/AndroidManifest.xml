@@ -28,15 +28,16 @@
     </uses-permission>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
+    <!-- 读取联系人权限 -->
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
     <application
         android:name="com.lu.momeymanager.app.MomeyManagerApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/ThemeActivity" >
         <activity
-            android:name="com.lu.momeymanager.view.widget.activity.MainActivity"
+            android:name="com.lu.momeymanager.view.activity.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan">
             <intent-filter>
@@ -45,20 +46,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.SettingActivity" >
+        <activity
+            android:theme="@style/ActivityTranslucent"
+            android:name="com.lu.momeymanager.view.activity.SettingActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.BalanceQueryActivity" >
+        <activity android:name="com.lu.momeymanager.view.activity.BalanceQueryActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.CreateGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.activity.GameActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.GresturePasswordSetActivity" >
+        <activity android:name="com.lu.momeymanager.view.activity.gesturepassword.CreateGesturePasswordActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.GuideGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.activity.gesturepassword.GresturePasswordSetActivity" >
         </activity>
-        <activity android:name="com.lu.momeymanager.view.widget.activity.gesturepassword.UnlockGesturePasswordActivity" >
+        <activity android:name="com.lu.momeymanager.view.activity.gesturepassword.GuideGesturePasswordActivity" >
+        </activity>
+        <activity android:name="com.lu.momeymanager.view.activity.gesturepassword.UnlockGesturePasswordActivity" >
         </activity>
 
-        <receiver android:name="com.lu.momeymanager.view.widget.receiver.SmsBroadcastReceiver" >
+        <receiver android:name="com.lu.momeymanager.view.receiver.SmsBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />

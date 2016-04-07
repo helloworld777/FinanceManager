@@ -6,7 +6,7 @@ import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.Constant;
 import com.lu.momeymanager.util.SPUtils;
 import com.lu.momeymanager.util.StringUtil;
-import com.lu.momeymanager.view.widget.lockpatternview.LockPatternUtils;
+import com.lu.momeymanager.view.lockpatternview.LockPatternUtils;
 
 import cn.bmob.v3.Bmob;
 

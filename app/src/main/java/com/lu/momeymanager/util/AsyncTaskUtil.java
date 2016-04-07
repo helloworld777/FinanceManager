@@ -4,7 +4,7 @@ import android.R.integer;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.lu.momeymanager.view.widget.dialog.DialogLoading;
+import com.lu.momeymanager.view.dialog.DialogLoading;
 
 public class AsyncTaskUtil {
 

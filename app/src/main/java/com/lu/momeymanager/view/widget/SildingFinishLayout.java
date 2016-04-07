@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.Scroller;
 
 import com.lu.financemanager.R;
@@ -18,14 +18,14 @@ import com.lu.momeymanager.util.Debug;
 
 /**
  */
-public class SildingFinishLayout extends RelativeLayout {
+public class SildingFinishLayout extends FrameLayout {
 
     /**
      * 滑动的最小距离
      */
     private int mTouchSlop;
     private Scroller mScroller;
-    private ViewGroup mParentView;
+    //    private ViewGroup mParentView;
     private int viewWidth;
 
     public SildingFinishLayout(Context context, AttributeSet attrs) {
@@ -38,7 +38,12 @@ public class SildingFinishLayout extends RelativeLayout {
         d("mTouchSlop:" + mTouchSlop);
         mScroller = new Scroller(context);
         mShadowDrawable = getResources().getDrawable(R.drawable.shadow_left);
+
+
+        mActivity = (Activity) context;
+        d("mActivity:" + mActivity);
     }
+
     private View mContentView;
     private int lastX;
     private boolean isSlop = false;
@@ -57,13 +62,13 @@ public class SildingFinishLayout extends RelativeLayout {
                 int x = (int) event.getRawX();
                 int dx = lastX - x;
 
-                d("dx:" + dx);
+//                d("dx:" + dx);
                 if (dx < 0 && Math.abs(dx) > mTouchSlop) {
                     isSlop = true;
                 }
                 lastX = x;
                 if (isSlop) {
-                    mParentView.scrollBy(dx, 0);
+                    mContentView.scrollBy(dx, 0);
                 }
                 break;
             case MotionEvent.ACTION_UP:
@@ -71,16 +76,20 @@ public class SildingFinishLayout extends RelativeLayout {
                 d("ACTION_UP event.getX():" + event.getX() + ",event.getRawX():" + event.getRawX());
                 if (isSlop) {
                     x = (int) event.getRawX();
-                    int scrollx = mParentView.getScrollX();
+                    int scrollx = mContentView.getScrollX();
                     d("scrollx:" + scrollx);
                     if (Math.abs(scrollx) > viewWidth / 3) {
-                        final int delta = (viewWidth + mParentView.getScrollX());
-                        mScroller.startScroll(mParentView.getScrollX(), 0, -delta, 0);
+                        final int delta = (viewWidth + mContentView.getScrollX());
+
+                        d("delta:" + delta);
+                        mScroller.startScroll(mContentView.getScrollX(), 0, -delta+1, 0);
                         postInvalidate();
+                        isFinished = true;
                     } else {
-//                        final int delta = (viewWidth + mParentView.getScrollX());
-                        mScroller.startScroll(mParentView.getScrollX(), 0, -mParentView.getScrollX(), 0);
+//                        d("scrollx:" + scrollx);
+                        mScroller.startScroll(mContentView.getScrollX(), 0, -mContentView.getScrollX(), 0);
                         postInvalidate();
+                        isFinished = false;
                     }
                 }
                 isSlop = false;
@@ -90,24 +99,28 @@ public class SildingFinishLayout extends RelativeLayout {
         return super.onTouchEvent(event);
     }
 
+    private Activity mActivity;
+
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
             d("computeScroll............mScroller.getCurrX():" + mScroller.getCurrX() + ",mScroller.getCurrY():" + mScroller.getCurrY());
-            mParentView.scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
-            invalidate();
-
-            if(mScroller.isFinished()){
-
-
-
+            mContentView.scrollTo(mScroller.getCurrX(), mScroller.getCurrY());
+            postInvalidate();
+            d("mScroller.isFinished():" + mScroller.isFinished());
+            if (mScroller.isFinished() && isFinished) {
+                d("mActivity.finished");
+                mActivity.finish();
             }
         }
     }
+
+    private boolean isFinished;
+
     public void attachToActivity(Activity activity) {
-//        mActivity = activity;
+        mActivity = activity;
         TypedArray a = activity.getTheme().obtainStyledAttributes(
-                new int[] { android.R.attr.windowBackground });
+                new int[]{android.R.attr.windowBackground});
         int background = a.getResourceId(0, 0);
         a.recycle();
 
@@ -116,10 +129,16 @@ public class SildingFinishLayout extends RelativeLayout {
         decorChild.setBackgroundResource(background);
         decor.removeView(decorChild);
         addView(decorChild);
-        setContentView(decorChild);
+        mContentView = (View) decorChild.getParent();
         decor.addView(this);
+
+
+        Debug.d(this, "decor:" + decor);
+        Debug.d(this, "decorChild:" + decorChild);
     }
+
     private Drawable mShadowDrawable;
+
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
@@ -140,14 +159,15 @@ public class SildingFinishLayout extends RelativeLayout {
     private void setContentView(View decorChild) {
         mContentView = (View) decorChild.getParent();
     }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        mParentView = (ViewGroup) getParent();
+        mContentView = (ViewGroup) getParent();
         viewWidth = getWidth();
         Debug.d(this, "viewWidth:" + viewWidth);
-        Debug.d(this, "mParentView:" + mParentView);
+        Debug.d(this, "mParentView:" + mContentView);
     }
 
     public void d(String msg) {

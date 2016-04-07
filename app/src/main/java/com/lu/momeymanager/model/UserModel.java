@@ -26,7 +26,6 @@ public class UserModel extends BaseModel{
         IUserExitView iUserExitView=new IUserExitView() {
             @Override
             public void isExist(boolean isExist) {
-
                 d("isExist-->isExist:"+isExist);
                 if(isExist){
                     if(iBackup!=null){

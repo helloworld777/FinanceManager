@@ -17,7 +17,7 @@
 
         <fragment
             android:id="@+id/slidingpane_menu"
-            android:name="com.lu.momeymanager.view.widget.fragment.MenuFragment"
+            android:name="MenuFragment"
             android:layout_width="150dp"
             android:layout_height="match_parent" />
 

@@ -40,11 +40,7 @@
             android:name="com.lu.momeymanager.view.activity.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:theme="@style/ActivityTranslucent"
@@ -62,6 +58,33 @@
         </activity>
         <activity android:name="com.lu.momeymanager.view.activity.gesturepassword.UnlockGesturePasswordActivity" >
         </activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.AngleTutorials" >
+        </activity>
+        <activity android:name="com.example.android_robot_01.MainActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.example.android_robot_01.ShowHtmlActivity" >
+        </activity>
+
+
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Tutorial01" android:label="@string/app_name"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Tutorial02" android:clearTaskOnLaunch="true"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Tutorial03" android:clearTaskOnLaunch="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Tutorial04" android:clearTaskOnLaunch="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Tutorial05" android:clearTaskOnLaunch="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.tutorial.Game" android:clearTaskOnLaunch="true"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name="com.lu.momeymanager.view.activity.game.StepByStepGame" android:theme="@android:style/Theme.NoTitleBar.Fullscreen" android:screenOrientation="portrait"></activity>
+
 
         <receiver android:name="com.lu.momeymanager.view.receiver.SmsBroadcastReceiver" >
             <intent-filter>

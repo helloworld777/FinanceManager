@@ -59,4 +59,16 @@
     <string name="already_setting">已设置</string>
     <string name="back_tips">再按一次回到桌面</string>
 
-    <string name="detail">detaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetaildetail</string></resources>
+    <string name="detail">detail</string>
+    <string name="tut01">01 First Step</string>
+    <string name="tut02">02 Overloading</string>
+    <string name="tut03">03 Fullscreen &amp; FPS Counter</string>
+    <string name="tut04">04 User Interface</string>
+    <string name="tut05">05 Physics</string>
+
+
+
+    <string name="game">Game</string>
+    <string name="gamesteps">Step by Step Game</string>
+
+</resources>

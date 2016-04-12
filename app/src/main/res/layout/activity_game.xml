@@ -9,4 +9,15 @@
         android:gravity="center"
         android:background="@color/orange2"
         />
+
+
+
+
+    <com.lu.momeymanager.view.widget.BaseView
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="hellohellohello222"
+        android:gravity="center"
+        android:background="@color/orange2"
+        />
 </com.lu.momeymanager.view.BaseViewGroup>

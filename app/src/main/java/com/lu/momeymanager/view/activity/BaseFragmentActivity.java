@@ -3,6 +3,7 @@ package com.lu.momeymanager.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import com.lidroid.xutils.ViewUtils;
 import com.lu.momeymanager.util.Debug;
@@ -32,4 +33,5 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	protected void toast(String msg){
 		TopNoticeDialog.showToast(this,msg);
 	}
+	protected void viewClick(View view){};
 }

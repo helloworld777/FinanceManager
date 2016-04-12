@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.lu.financemanager.R;
 import com.lu.momeymanager.view.activity.BalanceQueryActivity;
-import com.lu.momeymanager.view.activity.GameActivity;
 import com.lu.momeymanager.view.activity.MainActivity;
 import com.lu.momeymanager.view.activity.SettingActivity;
+import com.lu.momeymanager.view.activity.tutorial.AngleTutorials;
 
 public class MenuFragment extends BaseFragment {
     private LinearLayout llSetting, llBalance;
@@ -35,6 +35,8 @@ public class MenuFragment extends BaseFragment {
         tvBackupContact.setOnClickListener(viewClick);
         TextView tvCustom = findViewById(view, R.id.tvCustom);
         tvCustom.setOnClickListener(viewClick);
+        TextView tvChat = findViewById(view, R.id.tvChat);
+        tvChat.setOnClickListener(viewClick);
         return view;
     }
 
@@ -58,7 +60,10 @@ public class MenuFragment extends BaseFragment {
                     ((MainActivity) getActivity()).backupContact();
                     break;
                 case R.id.tvCustom:
-                    startActivity(GameActivity.class);
+                    startActivity(AngleTutorials.class);
+                    break;
+                case R.id.tvChat:
+                    startActivity(com.example.android_robot_01.MainActivity.class);
                     break;
                 default:
                     break;

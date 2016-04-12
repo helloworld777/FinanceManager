@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.android_robot_01.bean.ChatMessage;
 import com.example.android_robot_01.bean.ChatMessage.Type;
+import com.example.android_robot_01.bean.Result;
 import com.lu.financemanager.R;
 
 import java.util.List;
@@ -112,7 +113,7 @@ public class ChatMessageAdapter extends BaseAdapter
 					intent.putExtra(ShowHtmlActivity.TEXT,message.getMsg());
 					intent.putExtra(ShowHtmlActivity.URL,message.result.url);
 					parent.getContext().startActivity(intent);
-				}else if(message.result!=null){
+				}else if(message.result!=null && (message.result.getCode()== Result.TYPE_NEW||message.result.getCode()==Result.TYPE_RECIPE)){
 					Intent intent=new Intent(parent.getContext(),DetailActivity.class);
 					intent.putExtra(DetailActivity.RESULT,message.result);
 //					intent.putExtra()

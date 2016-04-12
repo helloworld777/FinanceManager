@@ -116,7 +116,6 @@ public class ChatMessageAdapter extends BaseAdapter
 				}else if(message.result!=null && (message.result.getCode()== Result.TYPE_NEW||message.result.getCode()==Result.TYPE_RECIPE)){
 					Intent intent=new Intent(parent.getContext(),DetailActivity.class);
 					intent.putExtra(DetailActivity.RESULT,message.result);
-//					intent.putExtra()
 					parent.getContext().startActivity(intent);
 				}
 

@@ -17,6 +17,13 @@ import com.lu.financemanager.R;
 
 import java.util.List;
 
+/**
+ * App ID: 7991891
+
+ API Key: NEMOr9iVcjPBaA1G3GLypcca
+
+ Secret Key: 4ad1a0bf27ac6f3ef4ef09f77cf1ec78
+ */
 public class ChatMessageAdapter extends BaseAdapter
 {
 	private LayoutInflater mInflater;
@@ -26,6 +33,7 @@ public class ChatMessageAdapter extends BaseAdapter
 	{
 		mInflater = LayoutInflater.from(context);
 		mDatas = datas;
+
 	}
 
 	@Override

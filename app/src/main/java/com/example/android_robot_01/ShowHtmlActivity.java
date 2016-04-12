@@ -34,12 +34,12 @@ public class ShowHtmlActivity extends BaseFragmentActivity{
     @Override
     protected void initWidget() {
         WebSettings wSet = webView.getSettings();
-        wSet.setJavaScriptEnabled(true);
+//        wSet.setJavaScriptEnabled(true);
 
         webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         ivMore.setVisibility(View.GONE);
-
-
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setJavaScriptEnabled(false);
     }
 
     @OnClick({R.id.ivBack})

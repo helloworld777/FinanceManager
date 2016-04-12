@@ -1,6 +1,8 @@
 package com.example.android_robot_01.bean;
 
-public class Result
+import java.io.Serializable;
+
+public class Result implements Serializable
 {
 	public static final int TYPE_TEXT=100000;//100000	//文本
 	public static final int TYPE_NEW=302000;//100000		//新闻

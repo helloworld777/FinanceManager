@@ -35,18 +35,11 @@ public class ShowHtmlActivity extends BaseFragmentActivity{
     protected void initWidget() {
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
+
+        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         ivMore.setVisibility(View.GONE);
 
-        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                // TODO Auto-generated method stub
-                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-                view.loadUrl(url);
-                return true;
-            }
-        });
+
     }
 
     @OnClick({R.id.ivBack})
@@ -67,6 +60,16 @@ public class ShowHtmlActivity extends BaseFragmentActivity{
         }
         tvTitle.setText(binder.getString(TEXT));
         String url=binder.getString(URL);
+        d("url:"+url);
         webView.loadUrl(url);
+        //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 }

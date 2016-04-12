@@ -53,6 +53,7 @@
 
 
     <string name="setting">设置</string>
+    <string name="detail_title">详情</string>
     <string name="balance_query">余额</string>
     <string name="user_center">个人中心</string>
     <string name="no_setting">未设置</string>

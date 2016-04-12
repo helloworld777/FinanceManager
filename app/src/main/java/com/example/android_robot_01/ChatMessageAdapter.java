@@ -77,9 +77,9 @@ public class ChatMessageAdapter extends BaseAdapter
 						parent, false);
 				viewHolder.createDate = (TextView) convertView
 						.findViewById(R.id.chat_from_createDate);
-//				viewHolder.content = (TextView) convertView
-//						.findViewById(R.id.chat_from_content);
-				viewHolder.listview= (ListView) convertView.findViewById(R.id.listview);
+				viewHolder.content = (TextView) convertView
+						.findViewById(R.id.chat_from_content);
+//				viewHolder.listview= (ListView) convertView.findViewById(R.id.listview);
 				convertView.setTag(viewHolder);
 			} else
 			{
@@ -88,9 +88,9 @@ public class ChatMessageAdapter extends BaseAdapter
 
 				viewHolder.createDate = (TextView) convertView
 						.findViewById(R.id.chat_send_createDate);
-//				viewHolder.content = (TextView) convertView
-//						.findViewById(R.id.chat_send_content);
-				viewHolder.listview= (ListView) convertView.findViewById(R.id.listview);
+				viewHolder.content = (TextView) convertView
+						.findViewById(R.id.chat_send_content);
+//				viewHolder.listview= (ListView) convertView.findViewById(R.id.listview);
 				convertView.setTag(viewHolder);
 			}
 
@@ -99,19 +99,23 @@ public class ChatMessageAdapter extends BaseAdapter
 			viewHolder = (ViewHolder) convertView.getTag();
 		}
 
-//		viewHolder.content.setText(chatMessage.getMsg());
+		viewHolder.content.setText(chatMessage.getMsg());
 		viewHolder.createDate.setText(chatMessage.getDateStr());
 //		ArrayAdapter<String>
 
 		viewHolder.content.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
 				ChatMessage message=mDatas.get(position);
 				if(!TextUtils.isEmpty(message.result.url)){
 					Intent intent=new Intent(parent.getContext(),ShowHtmlActivity.class);
 					intent.putExtra(ShowHtmlActivity.TEXT,message.getMsg());
 					intent.putExtra(ShowHtmlActivity.URL,message.result.url);
+					parent.getContext().startActivity(intent);
+				}else if(message.result!=null){
+					Intent intent=new Intent(parent.getContext(),DetailActivity.class);
+					intent.putExtra(DetailActivity.RESULT,message.result);
+//					intent.putExtra()
 					parent.getContext().startActivity(intent);
 				}
 

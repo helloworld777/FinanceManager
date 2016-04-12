@@ -6,10 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.lidroid.xutils.ViewUtils;
 
 public class BaseActivity extends Activity {
+
+
+	protected  ImageView ivMore;
+	protected ImageView ivBack;
+	protected TextView tvTitle;
+
+
 	@TargetApi(19) @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		

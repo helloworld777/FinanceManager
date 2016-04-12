@@ -39,27 +39,27 @@
                 android:textSize="18sp" />
         </LinearLayout>
         
-        <!--<TextView -->
-            <!--android:id="@+id/chat_from_content"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:minHeight="50dp"-->
-            <!--android:background="@drawable/chat_from_msg"-->
-            <!--android:text="有大吗。。。"-->
-            <!--android:textSize="18sp"-->
-            <!--android:textColor="#000"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:focusable="true"-->
-            <!--android:clickable="true"-->
-            <!--android:lineSpacingExtra="2dp"-->
-            <!--/>-->
-        <ListView
-            android:id="@+id/listview"
+        <TextView
+            android:id="@+id/chat_from_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="50dp"
             android:background="@drawable/chat_from_msg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:text="有大吗。。。"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:gravity="center_vertical"
+            android:focusable="true"
+            android:clickable="true"
+            android:lineSpacingExtra="2dp"
+            />
+        <!--<ListView-->
+            <!--android:id="@+id/listview"-->
+            <!--android:background="@drawable/chat_from_msg"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-        </ListView>
+        <!--</ListView>-->
     </LinearLayout>
 
 </LinearLayout>

@@ -220,6 +220,7 @@ public class MainActivity extends BaseFragmentActivity
 		AuthInfo authInfo = mSpeechSynthesizer.auth(TtsMode.MIX);
 		// 判断授权信息是否正确，如果正确则初始化语音合成器并开始语音合成，如果失败则做错误处理
 		if (authInfo.isSuccess()) {
+			d("authInfo isSuccess");
 			mSpeechSynthesizer.initTts(TtsMode.MIX);
 			mSpeechSynthesizer.speak("百度语音合成示例程序正在运行");
 		} else {

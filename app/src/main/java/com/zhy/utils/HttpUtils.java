@@ -43,14 +43,19 @@ public class HttpUtils
 		}else
 		{
 			switch (result.getCode()){
+				case Result.TYPE_URL:
+					result.setText(result.getText()+"<点击查看>");
+					break;
 				case Result.TYPE_TEXT:
 					break;
 				case Result.TYPE_NEW:
 					result=gson.fromJson(res, ResultNew.class);
 					Debug.d(HttpUtils.class,"TYPE_NEW");
+					result.setText(result.getText()+"<点击查看>");
 					break;
 				case Result.TYPE_RECIPE:
 					result=gson.fromJson(res, ResultRecipe.class);
+					result.setText(result.getText()+"<点击查看>");
 					break;
 			}
 

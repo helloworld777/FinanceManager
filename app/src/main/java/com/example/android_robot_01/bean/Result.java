@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Result implements Serializable
 {
 	public static final int TYPE_TEXT=100000;//100000	//文本
+	public static final int TYPE_URL=200000;//100000	//文本
 	public static final int TYPE_NEW=302000;//100000		//新闻
 	public static final int TYPE_RECIPE=308000;//100000	//菜谱
 

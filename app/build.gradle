@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
 def releaseTime() {
-    return new Date().format("yyyy-MM-dd-hh-mm", TimeZone.getTimeZone("UTC"))
+    return new Date().format("yyyy-MM-dd")
 }
 android {
     compileSdkVersion 23
@@ -28,17 +28,22 @@ android {
 
     useLibrary 'org.apache.http.legacy'
 }
-android.applicationVariants.all { variant ->
-    variant.outputs.each { output ->
-        def outputFile = output.outputFile
-        if (outputFile != null && outputFile.name.endsWith('.apk')) {
-            //这里修改apk文件名
-            def fileName = "financeManager_${releaseTime()}.apk"
-
-            output.outputFile = new File(outputFile.parent, fileName)
-        }
-    }
-}
+//android.applicationVariants.all { variant ->
+//    variant.outputs.each { output ->
+//        def outputFile = output.outputFile
+//
+////        File file=new File(outputFile.parent);
+////        for(File f:file.listFiles()){
+////            f.delete();
+////        };
+//        if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//            //outputFile.delete();
+//            //这里修改apk文件名
+//            def fileName = "financeManager_${releaseTime()}.apk"
+//            output.outputFile = new File(outputFile.parent, fileName)
+//        }
+//    }
+//}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'

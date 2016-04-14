@@ -76,9 +76,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.android_robot_01.ShowHtmlActivity" >
+        <activity android:name="com.example.android_robot_01.ShowHtmlActivity"
+            android:theme="@style/ActivityTranslucent">
         </activity>
-        <activity android:name="com.example.android_robot_01.DetailActivity" >
+        <activity android:name="com.example.android_robot_01.DetailActivity"
+            android:theme="@style/ActivityTranslucent">
         </activity>
 
 

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#66aaff"
-
+    android:id="@+id/rlHeader"
      >
 
     <RelativeLayout
@@ -22,14 +22,19 @@
             android:src="@drawable/ic_common_title_bar_back" />
 
         <TextView
+            android:layout_toRightOf="@+id/ivBack"
             android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:focusableInTouchMode="true"
             android:singleLine="true"
             android:text="@string/all_consume"
             android:textColor="#ffffff"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:lines="1"
             android:textSize="20sp" />
 
         <ImageView

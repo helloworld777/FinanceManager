@@ -1,14 +1,20 @@
 package com.example.android_robot_01;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.LruCache;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -52,6 +58,12 @@ public class DetailActivity extends BaseFragmentActivity{
     private List<ResultRecipe.Recipe> recipeList=new ArrayList<>();
     private int type=-1;
     public static final String RESULT="result";
+
+
+    @ViewInject(R.id.rlHeader)
+    private RelativeLayout rlHeader;
+    private boolean isCloseHeader=false;
+    private int origenHeaderH;
     @Override
     protected void initWidget() {
         ivMore.setVisibility(View.GONE);
@@ -82,26 +94,117 @@ public class DetailActivity extends BaseFragmentActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                String msg,url;
-                if(type==0){
-                    msg=newList.get(i).article;
-                    url=newList.get(i).detailurl;
-                }else{
-                    msg=recipeList.get(i).name;
-                    url=recipeList.get(i).detailurl;
-                }
-
-
-                Intent intent=new Intent(view.getContext(),ShowHtmlActivity.class);
-                intent.putExtra(ShowHtmlActivity.TEXT,msg);
-                intent.putExtra(ShowHtmlActivity.URL,url);
-                startActivity(intent);
+                goToShowHtmlActivity(i);
             }
         });
 
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            int lastY;
+            int mTouchSlop = ViewConfiguration.get(DetailActivity.this).getScaledTouchSlop();
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+
+                switch (motionEvent.getAction()){
+
+                    case MotionEvent.ACTION_DOWN:
+                        lastY= (int) motionEvent.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int dy= (int) (motionEvent.getY()-lastY);
+
+                        //往下滑
+                        if(dy>0 && isCloseHeader){
+                            animatorOpenHeader();
+                        }else if(dy<0&&!isCloseHeader){
+                            animatorCloseHeader();
+                        }
+                        lastY= (int) motionEvent.getY();
+                        break;
+                }
+
+                return false;
+            }
+        });
+
+
+        rlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                origenHeaderH=rlHeader.getMeasuredHeight();
+            }
+        });
     }
 
+//    @Override
+//    public void onAttachedToWindow() {
+//        super.onAttachedToWindow();
+//
+//    }
+//
+//    @Override
+//    public void onWindowFocusChanged(boolean hasFocus) {
+//        super.onWindowFocusChanged(hasFocus);
+//        origenHeaderH=rlHeader.getMeasuredHeight();
+//    }
+
+    private void animatorCloseHeader() {
+        d("animatorCloseHeader.......rlHeader.getHeight():"+rlHeader.getHeight()+",origenHeaderH:"+origenHeaderH);
+        ObjectAnimator animator=ObjectAnimator.ofFloat(rlHeader,"translationY",0,-origenHeaderH);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float f= (float) valueAnimator.getAnimatedValue();
+                int translationY=((int) f);
+                d("animatorCloseHeader ...translationY:"+translationY);
+//                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
+//                params.height+=translationY;
+//                rlHeader.requestLayout();
+            }
+        });
+        animator.start();
+        isCloseHeader=true;
+    }
+    private void animatorOpenHeader() {
+        d("animatorOpenHeader........rlHeader.getHeight():"+rlHeader.getHeight());
+        ObjectAnimator animator=ObjectAnimator.ofFloat(rlHeader,"translationY",-origenHeaderH,0);
+
+//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//            @Override
+//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//                float f= (float) valueAnimator.getAnimatedValue();
+////                int translationY=((int) f);
+//                int translationY=Math.abs((int) f);
+//                d("animatorOpenHeader ...translationY:"+translationY);
+//                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
+//                params.height+=translationY;
+//                rlHeader.requestLayout();
+//            }
+//        });
+        animator.start();
+//       animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+//           @Override
+//           public void onAnimationUpdate(ValueAnimator valueAnimator) {
+//               int translationY= (int) valueAnimator.getAnimatedValue();
+//           }
+//       });
+        isCloseHeader=false;
+    }
+
+    private void goToShowHtmlActivity(int i) {
+        String msg,url;
+        if(type==0){
+            msg=newList.get(i).article;
+            url=newList.get(i).detailurl;
+        }else{
+            msg=recipeList.get(i).name;
+            url=recipeList.get(i).detailurl;
+        }
+        Intent intent=new Intent(this,ShowHtmlActivity.class);
+        intent.putExtra(ShowHtmlActivity.TEXT,msg);
+        intent.putExtra(ShowHtmlActivity.URL,url);
+        startActivity(intent);
+    }
     @OnClick({R.id.ivBack})
     protected void viewClick(View view) {
        finish();

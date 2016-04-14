@@ -49,6 +49,17 @@ public class SildingFinishLayout extends FrameLayout {
     private boolean isSlop = false;
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+        if(ev.getRawX()<50){
+
+            d("ev.getRawX():"+ev.getRawX()+"onInterceptTouchEvent");
+            return true;
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         switch (event.getAction()) {

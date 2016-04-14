@@ -1,10 +1,11 @@
 package com.example.android_robot_01.bean;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class ChatMessage {
+public class ChatMessage implements Serializable{
 
 	/**
 	 * 消息类型

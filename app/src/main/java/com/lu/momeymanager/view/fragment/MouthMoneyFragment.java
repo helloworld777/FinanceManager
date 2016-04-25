@@ -1,6 +1,10 @@
 package com.lu.momeymanager.view.fragment;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -263,21 +267,46 @@ public class MouthMoneyFragment extends BaseFragment {
 	}
 	private void initData(){
 		if(similarDateMoneyBeans.isEmpty()){
-			new AsyncTaskUtil(getActivity()).setIAsyncTaskCallBack(new AsyncTaskUtil.IAsyncTaskCallBack() {
-				@Override
-				public Object doInBackground(String... arg0) {
-					smsManager.getSmsFromPhone();
-					return null;
-				}
-				@Override
-				public void onPostExecute(Object result) {
-					adapter.notifyDataSetChanged();
-				}
-			}).execute("");
-			;
+			getData();
 		}
 		LogUtil.d(this,"similarDateMoneyBeans.size:"+similarDateMoneyBeans.size());
 	}
+	private void getData(){
+
+		if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_SMS)!= PackageManager.PERMISSION_GRANTED){
+//
+//            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+//                    0);
+			requestPermissions(new String[]{Manifest.permission.READ_SMS},0);
+        }
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+		if(requestCode==0){
+
+			if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+				new AsyncTaskUtil(getActivity()).setIAsyncTaskCallBack(new AsyncTaskUtil.IAsyncTaskCallBack() {
+					@Override
+					public Object doInBackground(String... arg0) {
+						smsManager.getSmsFromPhone();
+						return null;
+					}
+					@Override
+					public void onPostExecute(Object result) {
+						adapter.notifyDataSetChanged();
+					}
+				}).execute("");
+				d("it is ok");
+			}else{
+				d("it is faild");
+
+			}
+		}
+	}
+
 	public void onEventMainThread(BaseEvent baseEvent) {
 		switch (baseEvent.getEventType()) {
 		case BaseEvent.UPDATE_MAIN:

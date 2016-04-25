@@ -23,9 +23,6 @@ public class DialogUtil {
 	public static void showBackupDialog(Context context,final OkListener oilPriceClickOk){
 		showCustomDialog(context,R.layout.popup_oil_price,oilPriceClickOk);
 	}
-//	public static void showBackupDialog(Context context,final OkListener oilPriceClickOk){
-//		showCustomDialog(context,R.layout.popup_oil_price,oilPriceClickOk);
-//	}
 	public static void showCustomDialog(Context context,int layoutRes,final OkListener oilPriceClickOk){
 		if(!isActivityNotFinished(context)){
 			return;

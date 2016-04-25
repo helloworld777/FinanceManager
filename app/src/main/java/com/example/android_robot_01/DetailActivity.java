@@ -7,10 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.LruCache;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -98,42 +95,42 @@ public class DetailActivity extends BaseFragmentActivity{
             }
         });
 
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            int lastY;
-            int mTouchSlop = ViewConfiguration.get(DetailActivity.this).getScaledTouchSlop();
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
+//        listView.setOnTouchListener(new View.OnTouchListener() {
+//            int lastY;
+//            int mTouchSlop = ViewConfiguration.get(DetailActivity.this).getScaledTouchSlop();
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//
+//
+//                switch (motionEvent.getAction()){
+//
+//                    case MotionEvent.ACTION_DOWN:
+//                        lastY= (int) motionEvent.getY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        int dy= (int) (motionEvent.getY()-lastY);
+//
+//                        //往下滑
+//                        if(dy>0 && isCloseHeader){
+//                            animatorOpenHeader();
+//                        }else if(dy<0&&!isCloseHeader){
+//                            animatorCloseHeader();
+//                        }
+//                        lastY= (int) motionEvent.getY();
+//                        break;
+//                }
+//
+//                return false;
+//            }
+//        });
 
 
-                switch (motionEvent.getAction()){
-
-                    case MotionEvent.ACTION_DOWN:
-                        lastY= (int) motionEvent.getY();
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        int dy= (int) (motionEvent.getY()-lastY);
-
-                        //往下滑
-                        if(dy>0 && isCloseHeader){
-                            animatorOpenHeader();
-                        }else if(dy<0&&!isCloseHeader){
-                            animatorCloseHeader();
-                        }
-                        lastY= (int) motionEvent.getY();
-                        break;
-                }
-
-                return false;
-            }
-        });
-
-
-        rlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                origenHeaderH=rlHeader.getMeasuredHeight();
-            }
-        });
+//        rlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+//            @Override
+//            public void onGlobalLayout() {
+//                origenHeaderH=rlHeader.getMeasuredHeight();
+//            }
+//        });
     }
 
 //    @Override

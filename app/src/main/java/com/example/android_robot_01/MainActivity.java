@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -81,7 +82,7 @@ public class MainActivity extends BaseFragmentActivity {
         ;
     };
     boolean isClear = false;
-
+    private long start;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,6 +126,17 @@ public class MainActivity extends BaseFragmentActivity {
                     showEditDialog(data);
                 }
                 return true;
+            }
+        });
+
+        findViewById(R.id.tvName).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               long end= SystemClock.elapsedRealtime();
+                if(end-start<2000){
+                    startActivity(com.lu.momeymanager.view.activity.MainActivity.class);
+                }
+                start=SystemClock.elapsedRealtime();
             }
         });
     }

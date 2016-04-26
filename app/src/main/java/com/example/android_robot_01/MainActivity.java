@@ -13,6 +13,7 @@ import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.tts.answer.auth.AuthInfo;
@@ -23,6 +24,7 @@ import com.baidu.tts.client.TtsMode;
 import com.example.android_robot_01.bean.ChatMessage;
 import com.example.android_robot_01.bean.ChatMessage.Type;
 import com.lu.financemanager.R;
+import com.lu.momeymanager.util.DateUtil;
 import com.lu.momeymanager.util.DialogUtil;
 import com.lu.momeymanager.util.FileUtil;
 import com.lu.momeymanager.view.activity.BaseFragmentActivity;
@@ -139,6 +141,10 @@ public class MainActivity extends BaseFragmentActivity {
                 start=SystemClock.elapsedRealtime();
             }
         });
+
+//        ShortcutUtil.createShortCut(this,R.drawable.header,R.string.app_name);
+        TextView t= (TextView) findViewById(R.id.tvDate);
+                t.setText(DateUtil.computerDate());
     }
 
     private void showEditDialog(final String data) {

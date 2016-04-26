@@ -1,6 +1,8 @@
 package com.lu.momeymanager.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DateUtil {
 	private static Calendar calendar=null;
@@ -58,6 +60,24 @@ public class DateUtil {
 		}
 		
 		return new String(buffer);
+	}
+	public static String computerDate(){
+		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+		Date date= null;
+		Date now=null;
+		try {
+			date = sdf.parse("2015-11-22");
+			now=sdf.parse(sdf.format(new Date()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+//		long now= System.currentTimeMillis();
+//		Date now=sdf.parse(sdf.format(new Date()));
+		Debug.d("date","date.getTime():"+date.getTime());
+		Debug.d("date"," now.getTime():"+now.getTime());
+
+		return String.valueOf((now.getTime()-date.getTime())/(1000*60*60*24));
 	}
 	/**
 	 * 

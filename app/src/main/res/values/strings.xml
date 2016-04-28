@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FinanceManager</string>
+    <string name="app_name">robot</string>
     <string name="action_settings">Settings</string>
     <string name="type_chart">图表</string>
     <string name="type_normal">详情</string>

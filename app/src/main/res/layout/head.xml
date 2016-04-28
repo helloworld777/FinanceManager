@@ -21,7 +21,7 @@
             android:background="@drawable/selector_music_btn"
             android:src="@drawable/ic_common_title_bar_back" />
 
-        <TextView
+        <com.lu.momeymanager.view.widget.AlwaysMarqueeTextView
             android:layout_toRightOf="@+id/ivBack"
             android:id="@+id/tvTitle"
             android:layout_width="match_parent"
@@ -32,9 +32,8 @@
             android:singleLine="true"
             android:text="@string/all_consume"
             android:textColor="#ffffff"
+            android:focusable="true"
             android:ellipsize="marquee"
-            android:scrollHorizontally="true"
-            android:lines="1"
             android:textSize="20sp" />
 
         <ImageView

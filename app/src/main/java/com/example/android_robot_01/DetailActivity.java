@@ -7,7 +7,10 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.LruCache;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,6 +27,7 @@ import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.financemanager.R;
+import com.lu.momeymanager.model.HtmlModel;
 import com.lu.momeymanager.view.activity.BaseFragmentActivity;
 import com.lu.momeymanager.view.adapter.LuAdapter;
 import com.lu.momeymanager.view.adapter.ViewHolder;
@@ -61,6 +65,10 @@ public class DetailActivity extends BaseFragmentActivity{
     private RelativeLayout rlHeader;
     private boolean isCloseHeader=false;
     private int origenHeaderH;
+    private boolean isFirst=true;
+    boolean animatorRunning=false;
+
+
     @Override
     protected void initWidget() {
         ivMore.setVisibility(View.GONE);
@@ -95,96 +103,88 @@ public class DetailActivity extends BaseFragmentActivity{
             }
         });
 
-//        listView.setOnTouchListener(new View.OnTouchListener() {
-//            int lastY;
-//            int mTouchSlop = ViewConfiguration.get(DetailActivity.this).getScaledTouchSlop();
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//
-//
-//                switch (motionEvent.getAction()){
-//
-//                    case MotionEvent.ACTION_DOWN:
-//                        lastY= (int) motionEvent.getY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        int dy= (int) (motionEvent.getY()-lastY);
-//
-//                        //往下滑
-//                        if(dy>0 && isCloseHeader){
-//                            animatorOpenHeader();
-//                        }else if(dy<0&&!isCloseHeader){
-//                            animatorCloseHeader();
-//                        }
-//                        lastY= (int) motionEvent.getY();
-//                        break;
-//                }
-//
-//                return false;
-//            }
-//        });
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            int lastY;
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        lastY= (int) motionEvent.getY();
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        int dy= (int) (motionEvent.getY()-lastY);
+                        //往下滑
+                        if(dy>0 && isCloseHeader && !animatorRunning){
+                            isCloseHeader=!isCloseHeader;
+                            animatorRunning=true;
+                            animatorOpenHeader();
+                        }else if(dy<0&&!isCloseHeader && !animatorRunning){
+                            animatorRunning=true;
+                            isCloseHeader=!isCloseHeader;
+                            animatorCloseHeader();
+                        }
+                        lastY= (int) motionEvent.getY();
+                        break;
+                }
 
+                return false;
+            }
+        });
 
-//        rlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-//            @Override
-//            public void onGlobalLayout() {
-//                origenHeaderH=rlHeader.getMeasuredHeight();
-//            }
-//        });
+        rlHeader.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+//                d("onGlobalLayout...origenHeaderH:"+origenHeaderH);
+                if(isFirst){
+                    isFirst=false;
+                    origenHeaderH=rlHeader.getMeasuredHeight();
+                }
+
+            }
+        });
     }
 
-//    @Override
-//    public void onAttachedToWindow() {
-//        super.onAttachedToWindow();
-//
-//    }
-//
-//    @Override
-//    public void onWindowFocusChanged(boolean hasFocus) {
-//        super.onWindowFocusChanged(hasFocus);
-//        origenHeaderH=rlHeader.getMeasuredHeight();
-//    }
 
     private void animatorCloseHeader() {
-        d("animatorCloseHeader.......rlHeader.getHeight():"+rlHeader.getHeight()+",origenHeaderH:"+origenHeaderH);
         ObjectAnimator animator=ObjectAnimator.ofFloat(rlHeader,"translationY",0,-origenHeaderH);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                float f= (float) valueAnimator.getAnimatedValue();
+                float f= Math.abs((float) valueAnimator.getAnimatedValue());
                 int translationY=((int) f);
-                d("animatorCloseHeader ...translationY:"+translationY);
-//                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
-//                params.height+=translationY;
-//                rlHeader.requestLayout();
+                float a=f/120.0f;
+                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
+                params.height=(int)(origenHeaderH*(1-a));
+                d("animatorCloseHeader ...translationY:"+translationY+",rat:"+(1-a)+",params.height:"+params.height);
+                rlHeader.requestLayout();
+                if(f==origenHeaderH){
+                    animatorRunning=false;
+                }
             }
         });
         animator.start();
         isCloseHeader=true;
     }
     private void animatorOpenHeader() {
-        d("animatorOpenHeader........rlHeader.getHeight():"+rlHeader.getHeight());
+        d("animatorOpenHeader.......origenHeaderH:"+origenHeaderH);
         ObjectAnimator animator=ObjectAnimator.ofFloat(rlHeader,"translationY",-origenHeaderH,0);
 
-//        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//                float f= (float) valueAnimator.getAnimatedValue();
-////                int translationY=((int) f);
-//                int translationY=Math.abs((int) f);
-//                d("animatorOpenHeader ...translationY:"+translationY);
-//                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
-//                params.height+=translationY;
-//                rlHeader.requestLayout();
-//            }
-//        });
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                float f= Math.abs((float) valueAnimator.getAnimatedValue());
+                ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
+                float a=f/120.0f;
+                params.height=(int)(origenHeaderH*(1-a));
+                d("animatorOpenHeader ..."+"rat:"+(1-a)+",params.height:"+params.height);
+                rlHeader.requestLayout();
+                if(f==0){
+                    animatorRunning=false;
+                }
+            }
+
+        });
         animator.start();
-//       animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//           @Override
-//           public void onAnimationUpdate(ValueAnimator valueAnimator) {
-//               int translationY= (int) valueAnimator.getAnimatedValue();
-//           }
-//       });
         isCloseHeader=false;
     }
 

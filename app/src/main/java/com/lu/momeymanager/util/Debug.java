@@ -93,6 +93,12 @@ public class Debug {
         }
 
     }
+    public static void d(Object o, String msg,Object... objects) {
+        if (DEBUG) {
+            Log.d(o.getClass().getSimpleName(), String.format(msg,objects));
+        }
+
+    }
 
     public static void e(Class<?> class1, String msg) {
         if (DEBUG) {

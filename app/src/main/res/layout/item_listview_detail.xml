@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/img"
         android:singleLine="true"
+        android:textColor="@color/c333"
         android:text="title"/>
     <TextView
         android:id="@+id/tvSubTitle"
@@ -26,5 +27,6 @@
         android:layout_marginTop="@dimen/size5dp"
         android:layout_toRightOf="@+id/img"
         android:layout_below="@+id/tvTitle"
+        android:textColor="@color/c666"
         android:text="title"/>
 </RelativeLayout>

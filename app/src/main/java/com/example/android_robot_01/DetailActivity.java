@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.LruCache;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
@@ -17,17 +18,13 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-import com.android.volley.toolbox.Volley;
 import com.example.android_robot_01.bean.ResultNew;
 import com.example.android_robot_01.bean.ResultRecipe;
 import com.lidroid.xutils.view.annotation.ContentView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 import com.lidroid.xutils.view.annotation.event.OnClick;
 import com.lu.financemanager.R;
-import com.lu.momeymanager.model.HtmlModel;
 import com.lu.momeymanager.view.activity.BaseFragmentActivity;
 import com.lu.momeymanager.view.adapter.LuAdapter;
 import com.lu.momeymanager.view.adapter.ViewHolder;
@@ -67,11 +64,12 @@ public class DetailActivity extends BaseFragmentActivity{
     private int origenHeaderH;
     private boolean isFirst=true;
     boolean animatorRunning=false;
-
+    private int mTouchMove;
 
     @Override
     protected void initWidget() {
         ivMore.setVisibility(View.GONE);
+        mTouchMove= ViewConfiguration.get(this).getScaledTouchSlop();
         tvTitle.setText(getString(R.string.detail_title));
         Bundle bundle= getIntent().getExtras();
         if(bundle!=null){
@@ -113,17 +111,21 @@ public class DetailActivity extends BaseFragmentActivity{
                         break;
                     case MotionEvent.ACTION_MOVE:
                         int dy= (int) (motionEvent.getY()-lastY);
-                        //往下滑
-                        if(dy>0 && isCloseHeader && !animatorRunning){
-                            isCloseHeader=!isCloseHeader;
-                            animatorRunning=true;
-                            animatorOpenHeader();
-                        }else if(dy<0&&!isCloseHeader && !animatorRunning){
-                            animatorRunning=true;
-                            isCloseHeader=!isCloseHeader;
-                            animatorCloseHeader();
+
+                        if(Math.abs(dy)>mTouchMove){
+                            //往下滑
+                            if(dy>0 && isCloseHeader && !animatorRunning){
+                                isCloseHeader=!isCloseHeader;
+                                animatorRunning=true;
+                                animatorOpenHeader();
+                            }else if(dy<0&&!isCloseHeader && !animatorRunning){
+                                animatorRunning=true;
+                                isCloseHeader=!isCloseHeader;
+                                animatorCloseHeader();
+                            }
                         }
-                        lastY= (int) motionEvent.getY();
+
+//                        lastY= (int) motionEvent.getY();
                         break;
                 }
 
@@ -152,7 +154,7 @@ public class DetailActivity extends BaseFragmentActivity{
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float f= Math.abs((float) valueAnimator.getAnimatedValue());
                 int translationY=((int) f);
-                float a=f/120.0f;
+                float a=f/origenHeaderH;
                 ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
                 params.height=(int)(origenHeaderH*(1-a));
                 d("animatorCloseHeader ...translationY:"+translationY+",rat:"+(1-a)+",params.height:"+params.height);
@@ -174,7 +176,7 @@ public class DetailActivity extends BaseFragmentActivity{
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 float f= Math.abs((float) valueAnimator.getAnimatedValue());
                 ViewGroup.LayoutParams params=rlHeader.getLayoutParams();
-                float a=f/120.0f;
+                float a=f/origenHeaderH;
                 params.height=(int)(origenHeaderH*(1-a));
                 d("animatorOpenHeader ..."+"rat:"+(1-a)+",params.height:"+params.height);
                 rlHeader.requestLayout();
@@ -229,11 +231,13 @@ public class DetailActivity extends BaseFragmentActivity{
             return;
         }
         d("displayImg url:"+url);
-        RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
-        NetworkImageView image;
-        ImageLoader imageLoader = new ImageLoader(mQueue, new BitmapCache());
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.header, R.drawable.header);
-        imageLoader.get(url, listener);
+//        RequestQueue mQueue = Volley.newRequestQueue(getApplicationContext());
+//        NetworkImageView image;
+//        ImageLoader imageLoader = new ImageLoader(mQueue, new BitmapCache());
+//        ImageLoader.ImageListener listener = ImageLoader.getImageListener(imageView,R.drawable.header, R.drawable.header);
+//        imageLoader.get(url, listener);
+
+        com.nostra13.universalimageloader.core.ImageLoader.getInstance().displayImage(url,imageView);
 
         //指定图片允许的最大宽度和高度
         //imageLoader.get("http://developer.android.com/images/home/aw_dac.png",listener, 200, 200);
@@ -266,5 +270,11 @@ public class DetailActivity extends BaseFragmentActivity{
             mCache.put(url, bitmap);
         }
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(0, 0);
     }
 }

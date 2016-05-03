@@ -1,6 +1,8 @@
 package com.example.android_robot_01;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -41,12 +43,12 @@ public class ShowHtmlActivity extends BaseFragmentActivity implements HtmlModel.
     protected void initWidget() {
         progressView=new ProgressView(this);
         WebSettings wSet = webView.getSettings();
-//        wSet.setJavaScriptEnabled(true);
+        wSet.setJavaScriptEnabled(true);
 
-        webView.getSettings().setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        wSet.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
         ivMore.setVisibility(View.GONE);
-        webView.getSettings().setDomStorageEnabled(true);
-        webView.getSettings().setJavaScriptEnabled(false);
+        wSet.setDomStorageEnabled(true);
+        wSet.setJavaScriptEnabled(false);
 
         progressView.apptoTarget(webView);
 
@@ -73,7 +75,7 @@ public class ShowHtmlActivity extends BaseFragmentActivity implements HtmlModel.
         tvTitle.setText(binder.getString(TEXT));
         String url=binder.getString(URL);
         d("url:"+url);
-        webView.loadUrl(url);
+
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient(){
             @Override
@@ -84,12 +86,18 @@ public class ShowHtmlActivity extends BaseFragmentActivity implements HtmlModel.
                 htmlModel.getTitle(url);
                 return true;
             }
-
+        });
+        webView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
+            public boolean onTouch(View view, MotionEvent motionEvent) {
 
+                if(motionEvent.getAction()==MotionEvent.ACTION_DOWN){
+                    d("onTouch");
+                    tvTitle.requestFocus();
+                }
+
+                return false;
+            }
         });
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
@@ -98,7 +106,7 @@ public class ShowHtmlActivity extends BaseFragmentActivity implements HtmlModel.
             }
 
         });
-
+        webView.loadUrl(url);
     }
 
     @Override
@@ -106,4 +114,18 @@ public class ShowHtmlActivity extends BaseFragmentActivity implements HtmlModel.
         tvTitle.setText(title);
         tvTitle.requestFocus();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if(keyCode==KeyEvent.KEYCODE_BACK &&webView.canGoBack()){
+            webView.goBack();
+            return true;
+        }else{
+            return super.onKeyDown(keyCode, event);
+        }
+
+    }
+
+
 }

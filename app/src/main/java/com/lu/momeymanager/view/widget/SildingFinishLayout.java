@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.Interpolator;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
@@ -36,7 +38,8 @@ public class SildingFinishLayout extends FrameLayout {
         super(context, attrs, defStyle);
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         d("mTouchSlop:" + mTouchSlop);
-        mScroller = new Scroller(context);
+        Interpolator polator = new BounceInterpolator();
+        mScroller = new Scroller(context,polator);
         mShadowDrawable = getResources().getDrawable(R.drawable.shadow_left);
 
 

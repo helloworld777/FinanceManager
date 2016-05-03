@@ -15,7 +15,11 @@ public class FileUtil {
 	public static final String APP_PATH="/sdcard/lu/moneymanager/";
 	public static final String APP_EXCEL_PATH="/sdcard/lu/moneymanager/excel/";
 	public static final String CARSH_PATH="/sdcard/lu/moneymanager/crash/";
+	public static final String APP_IMG_CACHE_PATH=APP_PATH+"img";
 
+	public static String getImgCachePath(){
+		return mkdir(APP_IMG_CACHE_PATH);
+	}
 	public static String mkdir(String path){
 		File file=new File(path);
 		if(!file.exists()){

@@ -16,17 +16,20 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.baidu.tts.answer.auth.AuthInfo;
-import com.baidu.tts.client.SpeechError;
-import com.baidu.tts.client.SpeechSynthesizer;
-import com.baidu.tts.client.SpeechSynthesizerListener;
-import com.baidu.tts.client.TtsMode;
 import com.example.android_robot_01.bean.ChatMessage;
 import com.example.android_robot_01.bean.ChatMessage.Type;
+import com.iflytek.cloud.ErrorCode;
+import com.iflytek.cloud.InitListener;
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechSynthesizer;
+import com.iflytek.cloud.SynthesizerListener;
 import com.lu.financemanager.R;
 import com.lu.momeymanager.util.DateUtil;
+import com.lu.momeymanager.util.Debug;
 import com.lu.momeymanager.util.DialogUtil;
 import com.lu.momeymanager.util.FileUtil;
+import com.lu.momeymanager.util.TopNoticeDialog;
 import com.lu.momeymanager.view.activity.BaseFragmentActivity;
 import com.zhy.utils.HttpUtils;
 
@@ -59,7 +62,7 @@ public class MainActivity extends BaseFragmentActivity {
 
     //	private TTSManager ttsManager;
     // 语音合成客户端
-    private SpeechSynthesizer mSpeechSynthesizer;
+//    private SpeechSynthesizer mSpeechSynthesizer;
 
     private String mSampleDirPath;
     private static final String SAMPLE_DIR_NAME = "baiduTTS";
@@ -76,6 +79,17 @@ public class MainActivity extends BaseFragmentActivity {
 
 //			ttsManager.startTTS(from.getDateStr());
 //			mSpeechSynthesizer.speak(from.getDateStr());
+            setParam();
+            int code = mTts.startSpeaking(from.getMsg(), mTtsListener);
+            if (code != ErrorCode.SUCCESS) {
+                if(code == ErrorCode.ERROR_COMPONENT_NOT_INSTALLED){
+                    //未安装则跳转到提示安装页面
+                    mInstaller.install();
+                }else {
+                    showTip("语音合成失败,错误码: " + code);
+                }
+            }
+
             mDatas.add(from);
             mAdapter.notifyDataSetChanged();
             mChatView.setSelection(mDatas.size() - 1);
@@ -85,6 +99,12 @@ public class MainActivity extends BaseFragmentActivity {
     };
     boolean isClear = false;
     private long start;
+
+
+    // 语音合成对象
+    private SpeechSynthesizer mTts;
+    private ApkInstaller mInstaller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,8 +165,127 @@ public class MainActivity extends BaseFragmentActivity {
 //        ShortcutUtil.createShortCut(this,R.drawable.header,R.string.app_name);
         TextView t= (TextView) findViewById(R.id.tvDate);
                 t.setText(DateUtil.computerDate());
+
+        // 初始化合成对象
+        mTts = SpeechSynthesizer.createSynthesizer(this, mTtsInitListener);
+
+        mInstaller = new  ApkInstaller(this);
+    }
+    // 默认发音人
+    private String voicer = "xiaoyan";
+    // 引擎类型
+    private String mEngineType = SpeechConstant.TYPE_CLOUD;
+    /**
+     * 参数设置
+     * @return
+     */
+    private void setParam(){
+        // 清空参数
+        mTts.setParameter(SpeechConstant.PARAMS, null);
+        // 根据合成引擎设置相应参数
+        if(mEngineType.equals(SpeechConstant.TYPE_CLOUD)) {
+            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD);
+            // 设置在线合成发音人
+            mTts.setParameter(SpeechConstant.VOICE_NAME, voicer);
+            //设置合成语速
+            mTts.setParameter(SpeechConstant.SPEED, "50");
+            //设置合成音调
+            mTts.setParameter(SpeechConstant.PITCH, "50");
+            //设置合成音量
+            mTts.setParameter(SpeechConstant.VOLUME,  "50");
+        }else {
+            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_LOCAL);
+            // 设置本地合成发音人 voicer为空，默认通过语记界面指定发音人。
+            mTts.setParameter(SpeechConstant.VOICE_NAME, "");
+            /**
+             * TODO 本地合成不设置语速、音调、音量，默认使用语记设置
+             * 开发者如需自定义参数，请参考在线合成参数设置
+             */
+        }
+        //设置播放器音频流类型
+        mTts.setParameter(SpeechConstant.STREAM_TYPE, "3");
+        // 设置播放合成音频打断音乐播放，默认为true
+        mTts.setParameter(SpeechConstant.KEY_REQUEST_FOCUS, "true");
+
+        // 设置音频保存路径，保存音频格式支持pcm、wav，设置路径为sd卡请注意WRITE_EXTERNAL_STORAGE权限
+        // 注：AUDIO_FORMAT参数语记需要更新版本才能生效
+        mTts.setParameter(SpeechConstant.AUDIO_FORMAT, "wav");
+        mTts.setParameter(SpeechConstant.TTS_AUDIO_PATH, Environment.getExternalStorageDirectory()+"/msc/tts.wav");
     }
 
+    /**
+     * 合成回调监听。
+     */
+    private SynthesizerListener mTtsListener = new SynthesizerListener() {
+
+        @Override
+        public void onSpeakBegin() {
+//            showTip("开始播放");
+        }
+
+        @Override
+        public void onSpeakPaused() {
+//            showTip("暂停播放");
+        }
+
+        @Override
+        public void onSpeakResumed() {
+//            showTip("继续播放");
+        }
+
+        @Override
+        public void onBufferProgress(int percent, int beginPos, int endPos,
+                                     String info) {
+            // 合成进度
+//            mPercentForBuffering = percent;
+//            showTip((percent+""));
+        }
+
+        @Override
+        public void onSpeakProgress(int percent, int beginPos, int endPos) {
+            // 播放进度
+//            mPercentForPlaying = percent;
+//            showTip(percent+"");
+        }
+
+        @Override
+        public void onCompleted(SpeechError error) {
+//            if (error == null) {
+//                showTip("播放完成");
+//            } else if (error != null) {
+//                showTip(error.getPlainDescription(true));
+//            }
+        }
+
+        @Override
+        public void onEvent(int eventType, int arg1, int arg2, Bundle obj) {
+            // 以下代码用于获取与云端的会话id，当业务出错时将会话id提供给技术支持人员，可用于查询会话日志，定位出错原因
+            // 若使用本地能力，会话id为null
+            //	if (SpeechEvent.EVENT_SESSION_ID == eventType) {
+            //		String sid = obj.getString(SpeechEvent.KEY_EVENT_SESSION_ID);
+            //		Log.d(TAG, "session id =" + sid);
+            //	}
+        }
+    };
+    private void showTip(String msg){
+        DialogUtil.showToast(this,msg);
+    }
+    /**
+     * 初始化监听。
+     */
+    private InitListener mTtsInitListener = new InitListener() {
+        @Override
+        public void onInit(int code) {
+            Debug.d(MainActivity.this, "InitListener init() code = " + code);
+            if (code != ErrorCode.SUCCESS) {
+                TopNoticeDialog.showToast(MainActivity.this,"初始化失败,错误码："+code);
+            } else {
+                // 初始化成功，之后可以调用startSpeaking方法
+                // 注：有的开发者在onCreate方法中创建完合成对象之后马上就调用startSpeaking进行合成，
+                // 正确的做法是将onCreate中的startSpeaking调用移至这里
+            }
+        }
+    };
     private void showEditDialog(final String data) {
         String[] items = {"粘贴"};
         DialogUtil.showAlertDialog(mActivity, "选择", items, new DialogInterface.OnClickListener() {
@@ -228,72 +367,72 @@ public class MainActivity extends BaseFragmentActivity {
         }
     }
 
-    private void startTTS() {
-        // 获取语音合成对象实例
-        mSpeechSynthesizer = SpeechSynthesizer.getInstance();
-        // 设置context
-        mSpeechSynthesizer.setContext(this);
-        // 设置语音合成状态监听器
-        mSpeechSynthesizer.setSpeechSynthesizerListener(new SpeechSynthesizerListener() {
-            @Override
-            public void onSynthesizeStart(String s) {
-                d("onSynthesizeStart:" + s);
-            }
-
-            @Override
-            public void onSynthesizeDataArrived(String s, byte[] bytes, int i) {
-                d("onSynthesizeDataArrived:" + s);
-            }
-
-            @Override
-            public void onSynthesizeFinish(String s) {
-                d("onSynthesizeFinish:" + s);
-            }
-
-            @Override
-            public void onSpeechStart(String s) {
-                d("onSpeechStart:" + s);
-            }
-
-            @Override
-            public void onSpeechProgressChanged(String s, int i) {
-                d("onSpeechProgressChanged:" + s);
-            }
-
-            @Override
-            public void onSpeechFinish(String s) {
-                d("onSpeechFinish:" + s);
-            }
-
-            @Override
-            public void onError(String s, SpeechError speechError) {
-                d("onError:" + s);
-            }
-        });
-        // 设置在线语音合成授权，需要填入从百度语音官网申请的api_key和secret_key
-        mSpeechSynthesizer.setApiKey("NEMOr9iVcjPBaA1G3GLypcca", "4ad1a0bf27ac6f3ef4ef09f77cf1ec78");
-        // 设置离线语音合成授权，需要填入从百度语音官网申请的app_id
-        mSpeechSynthesizer.setAppId("7991891");
-        // 文本模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE, mSampleDirPath + "/"
-                + TEXT_MODEL_NAME);
-        // 声学模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_SPEECH_MODEL_FILE, mSampleDirPath + "/"
-                + SPEECH_FEMALE_MODEL_NAME);
-        // 本地授权文件路径,如未设置将使用默认路径.设置临时授权文件路径，LICENCE_FILE_NAME请替换成临时授权文件的实际路径，仅在使用临时license文件时需要进行设置，如果在[应用管理]中开通了离线授权，不需要设置该参数，建议将该行代码删除（离线引擎）
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_LICENCE_FILE, mSampleDirPath + "/"
-                + LICENSE_FILE_NAME);
-        AuthInfo authInfo = mSpeechSynthesizer.auth(TtsMode.MIX);
-        // 判断授权信息是否正确，如果正确则初始化语音合成器并开始语音合成，如果失败则做错误处理
-        if (authInfo.isSuccess()) {
-            d("authInfo isSuccess");
-            mSpeechSynthesizer.initTts(TtsMode.MIX);
-            mSpeechSynthesizer.speak("百度语音合成示例程序正在运行");
-        } else {
-            // 授权失败
-            d("authInfo error");
-        }
-    }
+//    private void startTTS() {
+//        // 获取语音合成对象实例
+//        mSpeechSynthesizer = SpeechSynthesizer.getInstance();
+//        // 设置context
+//        mSpeechSynthesizer.setContext(this);
+//        // 设置语音合成状态监听器
+//        mSpeechSynthesizer.setSpeechSynthesizerListener(new SpeechSynthesizerListener() {
+//            @Override
+//            public void onSynthesizeStart(String s) {
+//                d("onSynthesizeStart:" + s);
+//            }
+//
+//            @Override
+//            public void onSynthesizeDataArrived(String s, byte[] bytes, int i) {
+//                d("onSynthesizeDataArrived:" + s);
+//            }
+//
+//            @Override
+//            public void onSynthesizeFinish(String s) {
+//                d("onSynthesizeFinish:" + s);
+//            }
+//
+//            @Override
+//            public void onSpeechStart(String s) {
+//                d("onSpeechStart:" + s);
+//            }
+//
+//            @Override
+//            public void onSpeechProgressChanged(String s, int i) {
+//                d("onSpeechProgressChanged:" + s);
+//            }
+//
+//            @Override
+//            public void onSpeechFinish(String s) {
+//                d("onSpeechFinish:" + s);
+//            }
+//
+//            @Override
+//            public void onError(String s, SpeechError speechError) {
+//                d("onError:" + s);
+//            }
+//        });
+//        // 设置在线语音合成授权，需要填入从百度语音官网申请的api_key和secret_key
+//        mSpeechSynthesizer.setApiKey("NEMOr9iVcjPBaA1G3GLypcca", "4ad1a0bf27ac6f3ef4ef09f77cf1ec78");
+//        // 设置离线语音合成授权，需要填入从百度语音官网申请的app_id
+//        mSpeechSynthesizer.setAppId("7991891");
+//        // 文本模型文件路径 (离线引擎使用)
+//        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE, mSampleDirPath + "/"
+//                + TEXT_MODEL_NAME);
+//        // 声学模型文件路径 (离线引擎使用)
+//        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_SPEECH_MODEL_FILE, mSampleDirPath + "/"
+//                + SPEECH_FEMALE_MODEL_NAME);
+//        // 本地授权文件路径,如未设置将使用默认路径.设置临时授权文件路径，LICENCE_FILE_NAME请替换成临时授权文件的实际路径，仅在使用临时license文件时需要进行设置，如果在[应用管理]中开通了离线授权，不需要设置该参数，建议将该行代码删除（离线引擎）
+//        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_LICENCE_FILE, mSampleDirPath + "/"
+//                + LICENSE_FILE_NAME);
+//        AuthInfo authInfo = mSpeechSynthesizer.auth(TtsMode.MIX);
+//        // 判断授权信息是否正确，如果正确则初始化语音合成器并开始语音合成，如果失败则做错误处理
+//        if (authInfo.isSuccess()) {
+//            d("authInfo isSuccess");
+//            mSpeechSynthesizer.initTts(TtsMode.MIX);
+//            mSpeechSynthesizer.speak("百度语音合成示例程序正在运行");
+//        } else {
+//            // 授权失败
+//            d("authInfo error");
+//        }
+//    }
 
     @Override
     protected void initWidget() {

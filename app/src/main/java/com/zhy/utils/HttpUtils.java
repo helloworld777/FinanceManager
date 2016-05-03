@@ -8,6 +8,7 @@ import com.example.android_robot_01.bean.ResultNew;
 import com.example.android_robot_01.bean.ResultRecipe;
 import com.google.gson.Gson;
 import com.lu.momeymanager.util.Debug;
+import com.lu.momeymanager.util.LogUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -33,6 +34,7 @@ public class HttpUtils
 		ChatMessage message = new ChatMessage();
 		String url = setParams(msg);
 		String res = doGet(url);
+		LogUtil.d("HttpUtils","res:"+res);
 		Gson gson = new Gson();
 		Result result = gson.fromJson(res, Result.class);
 		
@@ -114,6 +116,7 @@ public class HttpUtils
 					baos.write(buf, 0, len);
 				}
 				baos.flush();
+
 				return baos.toString();
 			} else
 			{

@@ -12,6 +12,7 @@ import com.lidroid.xutils.ViewUtils;
 import com.lu.momeymanager.util.Debug;
 import com.lu.momeymanager.util.TopNoticeDialog;
 import com.lu.momeymanager.view.dialog.DialogLoading;
+import com.umeng.analytics.MobclickAgent;
 
 public abstract class BaseFragmentActivity extends FragmentActivity {
 	protected DialogLoading dialogLoading;
@@ -40,6 +41,17 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	}
 	protected void viewClick(View view){};
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MobclickAgent.onResume(this);
+	}
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPause(this);
+	}
 	public void copeData(String string){
 		ClipboardManager myClipboard;
 		myClipboard = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);

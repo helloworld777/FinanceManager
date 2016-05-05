@@ -1,5 +1,6 @@
 package com.lu.momeymanager.util;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,10 @@ public class JsonUtil {
     public static <T> T getBeanFromJson(Class<?> clazz,String json){
         T t=null;
         try {
-            t = (T) clazz.newInstance();
+            Field[] fs=clazz.getDeclaredFields();
+            Constructor[] cs=clazz.getDeclaredConstructors();
+            String args[]=new String[cs[0].getParameterTypes().length];
+            t=(T)cs[0].newInstance(args);
             String[] fields=json.replace("\"", "").replace("{","").replace("}", "").trim().split(",");
             for(String field:fields){
                 String[] values=field.split(":");

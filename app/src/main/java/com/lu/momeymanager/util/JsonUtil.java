@@ -24,7 +24,8 @@ public class JsonUtil {
         try {
             Field[] fs=clazz.getDeclaredFields();
             Constructor[] cs=clazz.getDeclaredConstructors();
-            String args[]=new String[cs[0].getParameterTypes().length];
+            Object args[]=new String[cs[0].getParameterTypes().length];
+
             t=(T)cs[0].newInstance(args);
             String[] fields=json.replace("\"", "").replace("{","").replace("}", "").trim().split(",");
             for(String field:fields){

@@ -267,18 +267,22 @@ public class MouthMoneyFragment extends BaseFragment {
 	}
 	private void initData(){
 		if(similarDateMoneyBeans.isEmpty()){
-			getData();
+			checkSelfPermission();
 		}
 		LogUtil.d(this,"similarDateMoneyBeans.size:"+similarDateMoneyBeans.size());
 	}
-	private void getData(){
+	private void checkSelfPermission(){
 
 		if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_SMS)!= PackageManager.PERMISSION_GRANTED){
 //
 //            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
 //                    0);
+			d("it is checkSelfPermission true");
 			requestPermissions(new String[]{Manifest.permission.READ_SMS},0);
-        }
+        }else{
+			d("it is checkSelfPermission false");
+			getData();
+		}
 	}
 
 	@Override
@@ -288,17 +292,7 @@ public class MouthMoneyFragment extends BaseFragment {
 		if(requestCode==0){
 
 			if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
-				new AsyncTaskUtil(getActivity()).setIAsyncTaskCallBack(new AsyncTaskUtil.IAsyncTaskCallBack() {
-					@Override
-					public Object doInBackground(String... arg0) {
-						smsManager.getSmsFromPhone();
-						return null;
-					}
-					@Override
-					public void onPostExecute(Object result) {
-						adapter.notifyDataSetChanged();
-					}
-				}).execute("");
+				getData();
 				d("it is ok");
 			}else{
 				d("it is faild");
@@ -306,7 +300,19 @@ public class MouthMoneyFragment extends BaseFragment {
 			}
 		}
 	}
-
+	private void getData(){
+		new AsyncTaskUtil(getActivity()).setIAsyncTaskCallBack(new AsyncTaskUtil.IAsyncTaskCallBack() {
+			@Override
+			public Object doInBackground(String... arg0) {
+				smsManager.getSmsFromPhone();
+				return null;
+			}
+			@Override
+			public void onPostExecute(Object result) {
+				adapter.notifyDataSetChanged();
+			}
+		}).execute("");
+	}
 	public void onEventMainThread(BaseEvent baseEvent) {
 		switch (baseEvent.getEventType()) {
 		case BaseEvent.UPDATE_MAIN:

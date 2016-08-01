@@ -5,6 +5,7 @@ import android.app.Application;
 import com.iflytek.cloud.SpeechUtility;
 import com.lu.momeymanager.manager.InOutBeanManager;
 import com.lu.momeymanager.util.FileUtil;
+import com.lu.momeymanager.util.StringUtil;
 import com.lu.momeymanager.view.lockpatternview.LockPatternUtils;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -25,11 +26,14 @@ public class MomeyManagerApplication extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		StringUtil.initString(this);
 		managerApplication=this;
 		InOutBeanManager.init(this);
 		initImageLoader();
 
-		SpeechUtility.createUtility(this,"appid=57282072 ");
+		SpeechUtility.createUtility(this, "appid=57282072 ");
+
+
 	}
 
 	private void initUmeng() {

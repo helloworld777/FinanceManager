@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'android'
 def releaseTime() {
     return new Date().format("yyyy-MM-dd")
 }
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
-
     defaultConfig {
         applicationId "com.lu.financemanager"
         minSdkVersion 15
@@ -26,7 +25,7 @@ android {
         }
     }
 
-    useLibrary 'org.apache.http.legacy'
+ //   useLibrary 'org.apache.http.legacy'
 }
 android.applicationVariants.all { variant ->
     variant.outputs.each { output ->
@@ -52,17 +51,4 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     compile project(':hellocharts-library')
 
-    //    compile files('libs/eventbus.jar')
-    //    compile files('libs/poi-3.6-20091214.jar')
-    //    compile files('libs/xUtils-2.6.14.jar')
-    //    compile files('libs/BmobSDK_V3.3.9_0612.jar')
-    //    compile files('libs/fastjson-1.2.2.jar')
-    //    compile files('libs/gson-2.2.4.jar')
-    //    compile files('libs/volly-1.0.11.jar')
-    //    compile files('libs/galaxy-v2.0.jar')
-    //    compile files('libs/com.baidu.tts_2.2.4.20160405_6a7eb4e_release.jar')
-//    compile files('libs/Msc.jar')
-//    compile files('libs/Sunflower.jar')
-//    compile files('libs/universal-image-loader-1.9.5.jar')
-//    compile files('libs/umeng-analytics-v5.5.3.jar')
 }

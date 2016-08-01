@@ -59,7 +59,7 @@ public class InOutBeanManager {
     public static InOutBeanManager getDefault() {
         return smsManager;
     }
-
+    ResolveMsgHelp resolveMsgHelp=new ResolveMsgHelp();
     public void queryBalance() {
         if (balanceBeans.size() > 0) {
             return;
@@ -222,7 +222,7 @@ public class InOutBeanManager {
         }
         return null;
     }
-    ResolveMsgHelp resolveMsgHelp=new ResolveMsgHelp();
+
     private class ResolveMsgHelp{
         ResolveMsgHelp(){
             bankNums.put(StringUtil.puFaNumber,StringUtil.puFa);

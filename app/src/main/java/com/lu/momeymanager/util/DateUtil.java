@@ -6,33 +6,51 @@ import java.util.Date;
 
 public class DateUtil {
 	private static Calendar calendar=null;
-	
+
 	/**
-	 * 
+	 *
 	 * @return 2014-11-18 14:16:33
 	 */
 	public static String getDate(){
-		
+
 		return getDay()+" "+getTime();
 	}
 	/**
-	 * 
+	 *
 	 * @return 2014/11/18 14:16:33
 	 */
 	public static String getDate2(){
-		
+
 		return getDay2()+" "+getTime();
 	}
 	/**
-	 * 
+	 *
 	 * @return 2014_11_18_14_16_33
 	 */
 	public static String getDate3(){
-		
+
 		return getDay3()+"_"+getTime3();
 	}
+	public static String computerMarryDate(){
+		SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+		Date date= null;
+		Date now=null;
+		try {
+			date = sdf.parse("2016-06-01");
+			now=sdf.parse(sdf.format(new Date()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+//		long now= System.currentTimeMillis();
+//		Date now=sdf.parse(sdf.format(new Date()));
+		Debug.d("date","date.getTime():"+date.getTime());
+		Debug.d("date"," now.getTime():"+now.getTime());
+
+		return String.valueOf((now.getTime()-date.getTime())/(1000*60*60*24));
+	}
 	/**
-	 * 
+	 *
 	 * @return 14:16:33
 	 */
 	public static String getTime(){
@@ -58,7 +76,7 @@ public class DateUtil {
 		}else{
 			buffer.append(String.valueOf(second));
 		}
-		
+
 		return new String(buffer);
 	}
 	public static String computerDate(){
@@ -80,7 +98,7 @@ public class DateUtil {
 		return String.valueOf((now.getTime()-date.getTime())/(1000*60*60*24));
 	}
 	/**
-	 * 
+	 *
 	 */
 	public static String getTime3(){
 		calendar=Calendar.getInstance();
@@ -105,32 +123,32 @@ public class DateUtil {
 		}else{
 			buffer.append(String.valueOf(second));
 		}
-		
+
 		return new String(buffer);
 	}
 	/**
-	 * 
+	 *
 	 */
 	public static String getTime2(){
 		calendar=Calendar.getInstance();
 		StringBuffer buffer=new StringBuffer();
 		 int hour=calendar.get(Calendar.HOUR_OF_DAY);
-		
+
 		if(hour >12){
 			buffer.append("0");
 			hour-=12;
 		}else{
 			buffer.append("0");
-			
+
 		}
-		
+
 //		if(hour<10){
 //			buffer.append("0"+hour);
 //		}else {
 			buffer.append(String.valueOf(hour));
 //		}
-		
-		
+
+
 		buffer.append(":");
 		final int minute=calendar.get(Calendar.MINUTE);
 		if(minute<10){
@@ -138,19 +156,19 @@ public class DateUtil {
 		}else{
 			buffer.append(String.valueOf(minute));
 		}
-		
-	
-		
+
+
+
 		return new String(buffer);
 	}
-	
+
 	/**
-	 * 
+	 *
 	 */
 	public static String getDay(){
 		calendar=Calendar.getInstance();
 		final StringBuffer buffer=new StringBuffer();
-		
+
 		final int year=calendar.get(Calendar.YEAR);
 		if(year<10){
 			buffer.append("0"+year);
@@ -171,16 +189,16 @@ public class DateUtil {
 		}else{
 			buffer.append(String.valueOf(day));
 		}
-		
+
 		return new String(buffer);
 	}
 	/**
-	 * 
+	 *
 	 */
 	public static String getDay3(){
 		calendar=Calendar.getInstance();
 		final StringBuffer buffer=new StringBuffer();
-		
+
 		final int year=calendar.get(Calendar.YEAR);
 		if(year<10){
 			buffer.append("0"+year);
@@ -201,16 +219,16 @@ public class DateUtil {
 		}else{
 			buffer.append(String.valueOf(day));
 		}
-		
+
 		return new String(buffer);
 	}
 	/**
-	 * 
+	 *
 	 */
 	public static String getDay2(){
 		calendar=Calendar.getInstance();
 		final StringBuffer buffer=new StringBuffer();
-		
+
 		final int year=calendar.get(Calendar.YEAR);
 		if(year<10){
 			buffer.append("0"+year);
@@ -233,6 +251,6 @@ public class DateUtil {
 		}
 		return new String(buffer);
 	}
-	
-	
+
+
 }

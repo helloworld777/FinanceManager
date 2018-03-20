@@ -164,7 +164,7 @@ public class MainActivity extends BaseFragmentActivity {
 
 //        ShortcutUtil.createShortCut(this,R.drawable.header,R.string.app_name);
         TextView t= (TextView) findViewById(R.id.tvDate);
-                t.setText(DateUtil.computerDate());
+                t.setText(DateUtil.computerDate()+"-"+DateUtil.computerMarryDate());
 
         // 初始化合成对象
         mTts = SpeechSynthesizer.createSynthesizer(this, mTtsInitListener);
